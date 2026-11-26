@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Synthesis | Translational AI for life sciences</title>
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="canonical" href="https://synthesisbioconsulting.com/">
+<meta property="og:url" content="https://synthesisbioconsulting.com/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://synthesisbioconsulting.com/icon-512.png">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#15110E">
+<meta name="description" content="Synthesis is a translational AI consultancy for biotech and healthtech. Scientists who de-risk drug discovery, medical imaging AI and software as a medical device with data and machine learning.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Synthesis","url":"https://synthesisbioconsulting.com","description":"Translational AI consultancy for life sciences: machine learning for drug discovery, omics data analysis, medical imaging AI, software as a medical device, analytical pipelines and technical due diligence.","knowsAbout":["Machine learning for drug discovery","Omics data analysis","Medical imaging AI","Software as a medical device","Clinical decision support","Technical due diligence"],"founder":[{"@type":"Person","name":"Sam McKaylin"},{"@type":"Person","name":"Kristofer Linton-Reid"}]}</script>
+<meta property="og:title" content="Synthesis. Translational AI for life sciences.">
+<meta property="og:description" content="From paper to product, one proof at a time.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Darkroom: one full-screen figure develops behind the text. Warm black, bone type, one coral. */
+  --bg:#15110E; --bone:#EFE8DD; --coral:#FF6B4A; --mute:#B3A99B; --line:#3A312A;
+  --disp:'Bricolage Grotesque','Helvetica Neue',Arial,sans-serif; --mono:'DM Mono',ui-monospace,Menlo,monospace;
+  --pad:clamp(20px,5.5vw,88px); color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--bone);font-family:var(--disp);font-size:18px;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+h1,h2,h3,p{margin:0}
+:focus-visible{outline:2px solid var(--coral);outline-offset:4px}
+#vpc{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block}
+.top{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;justify-content:space-between;align-items:center;padding:24px var(--pad)}
+.wm{font-weight:600;font-size:26px;letter-spacing:-.04em;text-decoration:none}
+.wm i{font-style:normal;color:var(--coral)}
+.top a.c{font-family:var(--mono);font-size:13px;text-underline-offset:5px}
+main{position:relative;z-index:1}
+.screen{min-height:min(100vh,900px);display:flex;flex-direction:column;justify-content:flex-end;gap:18px;padding:140px var(--pad) clamp(48px,8vw,110px)}
+.screen > *{max-width:min(46vw,34rem)}
+h1{font-weight:300;font-size:clamp(46px,6.4vw,108px);line-height:.96;letter-spacing:-.045em;max-width:min(50vw,9.4em)!important;text-wrap:balance}
+.second{font-size:clamp(20px,2.1vw,30px);line-height:1.2;letter-spacing:-.02em;color:var(--coral)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 28px;border-radius:27px;border:0;background:var(--bone);color:var(--bg);font:600 16px/1 var(--disp);text-decoration:none;cursor:pointer;align-self:flex-start;margin-top:10px}
+.btn:hover{background:#fff}
+.btn.line{background:none;color:var(--bone);box-shadow:inset 0 0 0 1.5px var(--bone)}
+.btn:disabled{opacity:.45}
+.n{font-family:var(--mono);font-size:13px;color:var(--mute)}
+.step h2{font-weight:300;font-size:clamp(60px,8.4vw,136px);line-height:.92;letter-spacing:-.05em}
+.q{font-size:clamp(20px,2vw,28px);line-height:1.2;letter-spacing:-.02em;color:var(--coral)}
+.t{color:var(--bone)}
+.solid{position:relative;z-index:2;background:var(--bg);padding:clamp(72px,11vw,170px) var(--pad)}
+.big p{font-weight:300;font-size:clamp(34px,5.4vw,88px);line-height:1;letter-spacing:-.045em;padding:clamp(20px,3vw,40px) 0;border-top:1px solid var(--line);max-width:14em}
+.big p:last-child{border-bottom:1px solid var(--line)}
+.demo{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr);gap:clamp(28px,6vw,110px);align-items:center}
+.demo h2{font-weight:300;font-size:clamp(44px,5.6vw,92px);line-height:.94;letter-spacing:-.045em;margin-bottom:18px}
+.demo .t{color:var(--mute);max-width:26em}
+.monitor{max-width:520px;margin:0 auto}
+.bezel{border:12px solid #2A231D;border-radius:16px;background:#000;overflow:hidden}
+.neck{width:74px;height:34px;background:#2A231D;margin:0 auto}
+.foot{width:210px;height:10px;border-radius:5px 5px 0 0;background:#2A231D;margin:0 auto}
+.bezel canvas{display:block;width:100%;height:auto;aspect-ratio:4/5;cursor:crosshair}
+.ctl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:22px 0 0}
+.ctl label{display:flex;flex-direction:column;gap:6px;font:400 12px/1.4 var(--mono);color:var(--mute)}
+input[type=range]{width:100%;accent-color:var(--coral);margin:0;height:28px}
+.ctl .btn{width:100%;margin:0;min-height:48px}
+.status{grid-column:1 / -1;font:400 13px/1.5 var(--mono);color:var(--bone);min-height:1.5em}
+.status b{color:var(--coral);font-weight:500}
+.people{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(28px,6vw,110px)}
+.people h3{font-weight:400;font-size:clamp(30px,3.4vw,50px);letter-spacing:-.04em;line-height:1}
+.people .n{display:block;margin:10px 0 16px}
+.people p{color:var(--mute)}
+.close{position:relative;z-index:2;background:var(--coral);color:var(--bg);padding:clamp(56px,9vw,130px) var(--pad)}
+.close h2{font-weight:300;font-size:clamp(48px,8.4vw,150px);line-height:.92;letter-spacing:-.05em}
+.close p{font-size:clamp(18px,1.7vw,24px);max-width:26em;margin-top:24px}
+.tbc{font-family:var(--mono);font-size:13px;box-shadow:inset 0 0 0 1px currentColor;padding:2px 6px}
+footer{position:relative;z-index:2;background:var(--bg);padding:28px var(--pad);font:400 12px/1.6 var(--mono);color:var(--mute)}
+@media (max-width:859px){
+  .screen{min-height:min(100vh,820px);padding-top:46vh}
+  .screen > *, h1{max-width:none!important}
+  .demo,.people{grid-template-columns:minmax(0,1fr)}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.top nav{display:flex;gap:clamp(14px,2vw,26px)}
+.view{padding-top:150px;min-height:80vh}
+.view[hidden]{display:none}
+body.cs main,body.cs #vpc{display:none}
+.view .n a,.svc h3 a{text-decoration:none}
+.svc h3 a:hover,.view .n a:hover{text-decoration:underline;text-underline-offset:5px}
+.lead{font-weight:300;font-size:clamp(26px,3vw,46px);line-height:1.05;letter-spacing:-.04em;max-width:16em}
+.covers{list-style:none;margin:28px 0 0;padding:0;border-top:1px solid var(--line)}
+.covers li{padding:14px 0;border-bottom:1px solid var(--line);font-size:clamp(17px,1.5vw,21px);letter-spacing:-.015em}
+canvas.sg.big{display:block;width:100%;height:auto;aspect-ratio:4/3;max-width:560px;justify-self:end}
+.more{display:flex;gap:10px 24px;flex-wrap:wrap;align-items:baseline;border-top:1px solid var(--line);margin-top:clamp(48px,7vw,100px);padding-top:20px}
+.portrait{aspect-ratio:4/3;max-width:360px;background:#1F1915;display:flex;align-items:flex-end;padding:12px;margin-bottom:22px}
+.people .status,.view .status{display:inline-block}
+.fnav{display:flex;gap:8px 22px;flex-wrap:wrap;margin-bottom:16px}
+.fnav a{color:var(--bone);text-underline-offset:4px}
+@media (min-width:860px){.people.three{grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(28px,4vw,64px)}}
+@media (max-width:859px){.view{padding-top:110px}.top .hm{display:none}canvas.sg.big{justify-self:start}}
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,4vw,64px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:clamp(20px,3vw,36px) 0}
+.pair p{font-weight:300;font-size:clamp(20px,2.1vw,30px);line-height:1.15;letter-spacing:-.03em;max-width:16em}
+@media (max-width:859px){.pair{grid-template-columns:minmax(0,1fr)}}
+.state p{font-weight:300;font-size:clamp(34px,5.4vw,88px);line-height:1;letter-spacing:-.045em;max-width:15em;text-wrap:balance}
+.state em{font-style:normal;color:var(--coral)}
+.ex{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(16px,3vw,48px);margin:clamp(12px,2vw,24px) 0 clamp(36px,5vw,72px)}
+.ex figure{margin:0}
+.ex canvas{display:block;width:100%;height:auto;aspect-ratio:4/3}
+.ex figcaption{font:400 13px/1.4 var(--mono);color:var(--mute);border-top:1px solid var(--line);padding-top:10px;margin-top:10px}
+.solid > .n{margin-bottom:18px;font-weight:400}
+.ch{font-weight:300;font-size:clamp(46px,6.4vw,108px);line-height:.96;letter-spacing:-.045em;max-width:none!important}
+.case{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(28px,6vw,110px);border-top:1px solid var(--line);padding:clamp(40px,6vw,90px) 0;margin-top:clamp(40px,6vw,90px)}
+.case + .case{margin-top:0}
+.case > div{display:flex;flex-direction:column;gap:16px}
+.case h2{font-weight:300;font-size:clamp(38px,4.6vw,76px);line-height:.96;letter-spacing:-.045em}
+.case .status{align-self:flex-start;font:400 12px/1.4 var(--mono);color:var(--coral);box-shadow:inset 0 0 0 1px var(--coral);padding:6px 10px}
+.case p{max-width:32em}
+.case canvas{display:block;width:100%;height:auto;aspect-ratio:16/9}
+.facts{margin:0;display:grid;grid-template-columns:110px minmax(0,1fr);border-top:1px solid var(--line)}
+.facts dt,.facts dd{margin:0;padding:12px 0;border-bottom:1px solid var(--line)}
+.facts dt{font:400 12px/1.6 var(--mono);color:var(--mute)}
+@media (max-width:859px){.case{grid-template-columns:minmax(0,1fr)}}
+.acts{display:flex;gap:24px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.acts .btn{margin:0}
+.soft{font-family:var(--mono);font-size:14px;text-underline-offset:5px}
+.demo .who + .btn{margin-top:22px}
+.cgrid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(28px,6vw,110px);align-items:start}
+.close form{display:flex;flex-direction:column;gap:16px}
+.close label{display:flex;flex-direction:column;gap:6px;font:500 13px/1.4 var(--mono)}
+.close input,.close textarea,.close select{font:400 17px/1.4 var(--disp);color:var(--bg);background:rgba(21,17,14,.08);border:0;border-bottom:2px solid var(--bg);padding:10px 12px;border-radius:0;width:100%;resize:vertical}
+.close :focus-visible{outline:3px solid var(--bg);outline-offset:2px}
+.btn.dark{background:var(--bg);color:var(--bone);align-self:flex-start;margin:4px 0 0}
+.btn.dark:hover{background:#000}
+.close .fnote{font:400 13px/1.5 var(--mono);margin:0;max-width:none}
+@media (max-width:859px){.cgrid{grid-template-columns:minmax(0,1fr)}}
+.what{font-size:clamp(17px,1.35vw,20px);line-height:1.45;color:var(--bone)}
+.screen .btn + .n{margin-top:6px}
+.out{font-family:var(--mono);font-size:13px;color:var(--mute);border-top:1px solid var(--line);padding-top:14px;margin-top:4px}
+.out b{font-weight:500;color:var(--bone)}
+.pick{display:flex;gap:8px;flex-wrap:wrap;margin-top:28px}
+.pick .btn{margin:0;min-height:44px;padding:0 20px;font-size:15px}
+.who{font-weight:300;font-size:clamp(24px,2.5vw,38px);line-height:1.1;letter-spacing:-.035em;margin-top:22px;max-width:15em;min-height:3.3em}
+#rw{display:block;width:100%;height:auto;aspect-ratio:4/3}
+.svc{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(28px,6vw,110px);border-top:1px solid var(--line)}
+.svc li{display:grid;grid-template-columns:clamp(84px,9vw,128px) minmax(0,1fr);gap:clamp(16px,2vw,28px);align-items:center;padding:20px 0;border-bottom:1px solid var(--line)}
+.svc canvas{display:block;width:100%;height:auto;aspect-ratio:4/3}
+.svc h3{font-weight:400;font-size:clamp(19px,1.7vw,24px);letter-spacing:-.025em;line-height:1.2}
+.svc p{margin-top:6px;color:var(--mute);font-size:16px}
+@media (max-width:859px){.svc{grid-template-columns:minmax(0,1fr)}}
+.clients{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.clients li{padding:clamp(22px,3vw,40px) 16px clamp(22px,3vw,40px) 0;font-weight:400;font-size:clamp(22px,2.5vw,38px);letter-spacing:-.035em;line-height:1.05}
+.clients li + li{border-left:1px solid var(--line);padding-left:clamp(14px,2vw,28px)}
+@media (max-width:859px){.clients{grid-template-columns:repeat(2,minmax(0,1fr))}.clients li:nth-child(3){border-left:0;padding-left:0}.clients li:nth-child(n+3){border-top:1px solid var(--line)}}
+.demo h2.tools-h{font-size:clamp(32px,3.9vw,62px);line-height:1}
+.tabs{display:flex;flex-direction:column;margin-top:28px;max-width:26em}
+.tabs button{display:flex;align-items:center;gap:12px;background:none;border:0;border-top:1px solid var(--line);color:var(--mute);font:400 clamp(18px,1.6vw,22px)/1 var(--disp);letter-spacing:-.02em;padding:16px 0;text-align:left;cursor:pointer}
+.tabs button:last-child{border-bottom:1px solid var(--line)}
+.tabs button::before{content:'';width:9px;height:9px;border-radius:50%;background:var(--line)}
+.tabs button[aria-selected=true]{color:var(--bone)}
+.tabs button[aria-selected=true]::before{background:var(--coral)}
+.tabs button:hover{color:var(--bone)}
+.tool{aspect-ratio:4/5;background:#0D0A08}
+.tool[hidden],.ctl[hidden]{display:none}
+.tool canvas{display:block;width:100%;height:100%}
+#cb-c{cursor:pointer}
+.chat{height:100%;display:flex;flex-direction:column;padding:16px;gap:12px}
+.chat-h,.chat-f{font:400 11px/1.4 var(--mono);color:var(--mute);text-transform:uppercase;letter-spacing:.05em}
+.msgs{flex:1 1 0;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:10px;justify-content:flex-end}
+.msgs p{max-width:86%;padding:10px 14px;border-radius:16px;font-size:15px;line-height:1.4}
+.msgs .me{align-self:flex-end;background:var(--bone);color:var(--bg);border-bottom-right-radius:4px}
+.msgs .bot{align-self:flex-start;background:#261F19;color:var(--bone);border-bottom-left-radius:4px}
+.msgs .bot small{display:block;margin-top:8px;font:400 11px/1.4 var(--mono);color:var(--coral)}
+.ctl.one{grid-template-columns:minmax(0,1fr)}
+.ctl .q{justify-content:flex-start;text-align:left;font-weight:500}
+.seg{display:flex;gap:8px;grid-column:1 / -1}
+.seg .btn{flex:1 1 0;padding:0 8px;white-space:nowrap}
+#cb-view{grid-column:1 / -1}
+.btn.on{background:var(--bone);color:var(--bg)}
+@media (max-width:859px){.ex{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<canvas id="vpc" role="img" aria-label="A field of points that redraws itself for each stage: a paper that passes through a pipeline and becomes a molecule whose groups change, a plot, one molecule multiplied into many, and a crowd of patients that narrows to a study cohort and then to one hand X-ray."></canvas>
+<header class="top"><a class="wm" href="#top" aria-label="Synthesis, home">synthesis<i>.</i></a><nav aria-label="Main"><a class="c" href="#top">Home</a><a class="c" href="#case-studies">Work</a><a class="c" href="#services">Services</a><a class="c hm" href="#team">Team</a><a class="c hm" href="#investors">Investors</a><a class="c" href="#contact">Contact</a></nav></header>
+<main id="top">
+<section class="screen step" data-i="0">
+  <h1>Translational AI for life sciences.</h1>
+  <p class="second">From paper to product, one proof at a time.</p>
+  <p class="what">Synthesis is a scientific consultancy specialising in machine learning, data and regulatory support for preclinical and clinical-stage biotech and healthtech. The build team an early-stage fund keeps in-house, on call for yours.</p>
+  <div class="acts"><a class="btn" href="#contact">Bring us one question</a><a class="soft" href="#case-studies">See our work</a></div>
+  <p class="n">Our first conversation is always free.</p>
+</section>
+<section class="screen step" id="s1" data-i="1">
+  <p class="n">01 / 04</p>
+  <h2>Translation</h2>
+  <p class="q">Can it be built?</p>
+  <p class="t">We prototype your thesis. A first working version, built at low cost, so there&rsquo;s something real to test.</p>
+  <p class="out">You leave with <b>a working prototype</b></p>
+</section>
+<section class="screen step" id="s2" data-i="2">
+  <p class="n">02 / 04</p>
+  <h2>Evaluation</h2>
+  <p class="q">Is it worth building?</p>
+  <p class="t">We read it the way an investor will and put it up against real data. If it fails, you know while it&rsquo;s cheap. If it holds, you&rsquo;re investor ready.</p>
+  <p class="out">You leave with <b>a go or no-go, and the data behind it</b></p>
+</section>
+<section class="screen step" id="s3" data-i="3">
+  <p class="n">03 / 04</p>
+  <h2>Building</h2>
+  <p class="q">Will it scale?</p>
+  <p class="t">Your platform at scale, be it a high-throughput screening platform or a regulated medical device. Engineered to last, and to satisfy a regulator.</p>
+  <p class="out">You leave with <b>a platform your team runs</b></p>
+</section>
+<section class="screen step" id="s4" data-i="4">
+  <p class="n">04 / 04</p>
+  <h2>Validation</h2>
+  <p class="q">Does it work for patients?</p>
+  <p class="t">Preclinical and clinical validation, run with clinicians and specialists at leading hospitals and research institutes.</p>
+  <p class="out">You leave with <b>a validation study</b></p>
+</section>
+<section class="solid rst" data-i="0" aria-labelledby="h-svc">
+  <h2 class="n" id="h-svc">What we do</h2>
+  <ul class="svc">
+    <li><canvas aria-hidden="true"></canvas><div><h3><a href="#svc-drug-discovery">Machine learning for drug discovery</a></h3><p>From a library of compounds to one worth nominating.</p></div></li>
+    <li><canvas aria-hidden="true"></canvas><div><h3><a href="#svc-omics">Omics data analysis</a></h3><p>Find the target, or the biomarker, in the data you already have.</p></div></li>
+    <li><canvas aria-hidden="true"></canvas><div><h3><a href="#svc-medical-imaging">Medical imaging AI</a></h3><p>Computer vision for diagnostic imaging and screening.</p></div></li>
+    <li><canvas aria-hidden="true"></canvas><div><h3><a href="#svc-medical-device-software">Medical device software</a></h3><p>SaMD and AIaMD, built so a regulator can follow it.</p></div></li>
+    <li><canvas aria-hidden="true"></canvas><div><h3><a href="#svc-pipelines">Analytical pipelines and data architecture</a></h3><p>The ground everything else stands on.</p></div></li>
+    <li><canvas aria-hidden="true"></canvas><div><h3><a href="#svc-agents">AI agents and workflow integration</a></h3><p>AI tools and agents, inside the work your team already does.</p></div></li>
+    <li><canvas aria-hidden="true"></canvas><div><h3><a href="#svc-decision-support">Clinical decision support and research tools</a></h3><p>Tools that help clinicians and scientists read complex data and draft what follows.</p></div></li>
+  </ul>
+</section>
+<section class="solid" style="padding-top:0" aria-labelledby="h-val">
+  <div class="demo">
+    <div>
+      <h2 id="h-val">Spend follows proof.</h2>
+      <p class="t">We start where your data and models are, and staff a step only when it&rsquo;s needed. If the science fails, it fails early and cheap.</p>
+      <div class="pick" role="group" aria-label="Who are you?">
+        <button class="btn line on" type="button" data-w="0">Spinout</button><button class="btn line" type="button" data-w="1">Start-up</button><button class="btn line" type="button" data-w="2">Investor</button>
+      </div>
+      <p class="who" id="who" aria-live="polite">Your method works in your lab. We make it run outside it.</p>
+      <p><a class="soft" href="#who-we-work-with">Who we work with</a></p>
+      <a class="btn" href="#contact">Bring us one question</a>
+    </div>
+    <canvas id="rw" role="img" aria-label="An illustrative chart of capital spent across the four stages. The usual way spends most of it before any proof. With Synthesis, spend rises in small steps, each one after a proof."></canvas>
+  </div>
+</section>
+<section class="solid state" style="padding-top:0">
+  <p>Synthesis is a full-stack boutique consultancy that thrives on <em>regulatory, scientific and technical</em> complexity.</p>
+</section>
+<section class="solid" id="work" style="padding-top:0" aria-label="Examples of our work">
+  <p class="n">Examples of our work</p>
+  <div class="ex">
+    <figure><canvas role="img" aria-label="A plate of wells being read, with hits lighting up."></canvas><figcaption>Screen design</figcaption></figure>
+    <figure><canvas role="img" aria-label="Scattered data flowing through three steps and coming out in order."></canvas><figcaption>Analytical pipelines</figcaption></figure>
+    <figure><canvas role="img" aria-label="A bone being scanned and a finding boxed."></canvas><figcaption>Software as a medical device</figcaption></figure>
+    <figure><canvas role="img" aria-label="Three options scored, with the strongest one marked."></canvas><figcaption>Clinical decision support</figcaption></figure>
+  </div>
+  <div class="pair">
+    <p>Drugs we&rsquo;ve supported development of are in Phase I and Phase II trials.</p>
+    <p>A medical device we developed enters a multi-reader, multi-case study in 2027.</p>
+  </div>
+  <p style="margin-top:28px"><a class="soft" href="#case-studies">Read the case studies</a></p>
+</section>
+<section class="solid" style="padding-top:0" aria-label="Team">
+  <div class="people">
+    <div><h3>Sam McKaylin</h3><span class="n">Co-Founder</span><p>A Cambridge-trained developmental geneticist and machine learning engineer in drug discovery, Sam has founded and helped grow several healthtech companies in precision medicine and AI diagnostics. He also specialises in life sciences private equity and venture due diligence, advising LPs with more than $700bn in assets under management.</p></div>
+    <div><h3>Kristofer Linton-Reid</h3><span class="n">Co-Founder</span><p>A former Schmidt research fellow, Kris develops computer vision for cancer detection at Imperial College London. He is a drug discoverer and highly cited machine learning researcher, and has built products for NHS Scotland.</p></div>
+  </div>
+</section>
+<section class="solid" style="padding-top:0" aria-label="Clients">
+  <p class="n">Clients</p>
+  <ul class="clients"><li>Astron Health</li><li>Gr&uuml;nenthal</li><li>Juvex</li><li>Ride Therapeutics</li></ul>
+</section>
+<section class="solid" style="padding-top:0" aria-labelledby="h-demo">
+  <div class="demo">
+    <div>
+      <h2 id="h-demo" class="tools-h">We build tools scientists and clinicians can use first time.</h2>
+      <p class="t">Try three. Synthetic data, scripted models.</p>
+      <div class="tabs" role="tablist" aria-label="Example tools">
+        <button role="tab" type="button" aria-selected="true" data-t="rad">Radiology viewer</button>
+        <button role="tab" type="button" aria-selected="false" data-t="chat">Clinical assistant</button>
+        <button role="tab" type="button" aria-selected="false" data-t="combo">Drug combinations</button>
+      </div>
+    </div>
+    <div class="monitor">
+      <div class="bezel">
+        <div class="tool" id="t-rad"><canvas id="x-c" width="480" height="600" role="img" aria-label="A synthetic radiograph of a forearm on a monitor. You can draw a box on it, and the detector draws its own."></canvas></div>
+        <div class="tool" id="t-chat" hidden>
+          <div class="chat"><p class="chat-h">Synthetic record &middot; patient 01</p><div class="msgs" id="ch-msgs" aria-live="polite"><p class="bot">Ask about this record.</p></div><p class="chat-f">Scripted demo. Not medical advice.</p></div>
+        </div>
+        <div class="tool" id="t-combo" hidden><canvas id="cb-c" tabindex="0" role="img" aria-label="A six by six dose matrix for two compounds. Each cell shows simulated inhibition. Use the arrow keys or pointer to inspect a cell."></canvas></div>
+      </div>
+      <div class="neck"></div><div class="foot"></div>
+      <div class="ctl" id="ctl-rad">
+        <button class="btn" id="x-run" type="button">Ask the detector</button>
+        <button class="btn line" id="x-next" type="button">Next study</button>
+        <p class="status" id="x-status" aria-live="polite">Study 1 of 3.</p>
+      </div>
+      <div class="ctl one" id="ctl-chat" hidden>
+        <button class="btn line q" type="button" data-q="0">Summarise the imaging</button>
+        <button class="btn line q" type="button" data-q="1">What is missing from the record?</button>
+        <button class="btn line q" type="button" data-q="2">Draft a line for the clinic letter</button>
+      </div>
+      <div class="ctl" id="ctl-combo" hidden>
+        <div class="seg" role="group" aria-label="Compound pair"><button class="btn line pair on" type="button" data-p="0">A + B</button><button class="btn line pair" type="button" data-p="1">A + C</button><button class="btn line pair" type="button" data-p="2">B + C</button></div>
+        <button class="btn line" id="cb-view" type="button">Show synergy</button>
+        <p class="status" id="cb-status" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<div class="view solid" id="v-work" hidden>
+  <p class="n">Work</p>
+  <h1 class="ch">Two things we built.</h1>
+  <article class="case" id="case-mtb">
+    <div>
+      <p class="status">Clinical decision support</p>
+      <h2>A tumour board assistant</h2>
+      <p class="n">For a precision oncology company</p>
+      <p>A molecular tumour board has to read a patient&rsquo;s clinical history and molecular results together, then turn that reading into paperwork. We built an agentic research tool that does the gathering and the drafting.</p>
+      <p>It is used in two ways. A tumour board uses it to support a second-opinion service. Clinicians use it to interpret clinical and molecular data side by side.</p>
+      <p><a class="soft" href="#svc-decision-support">Clinical decision support and research tools</a></p>
+    </div>
+    <div>
+      <canvas class="cg" data-k="0" role="img" aria-label="Lines of a document being drafted from scattered data points."></canvas>
+      <dl class="facts">
+        <dt>Drafts</dt><dd>Reports, referral letters and compassionate access letters</dd>
+        <dt>Aim</dt><dd>Great cancer care for more patients, at lower cost</dd>
+        <dt>Commercial</dt><dd>$500k annual recurring revenue</dd>
+      </dl>
+    </div>
+  </article>
+  <article class="case" id="case-paed">
+    <div>
+      <p class="status">Preclinical</p>
+      <h2>Paediatric fracture detection</h2>
+      <p class="n">For a paediatric imaging company</p>
+      <p>Children&rsquo;s bones are not small adult bones. Growth plates and developing anatomy change what a fracture looks like. We built a radiology model that detects extremity fractures in patients from birth to 21.</p>
+      <p>It is being developed as AI as a medical device.</p>
+      <p><a class="soft" href="#svc-medical-device-software">Medical device software</a></p>
+    </div>
+    <div>
+      <canvas class="cg" data-k="1" role="img" aria-label="A bone drawn in points, scanned, with one area boxed."></canvas>
+      <dl class="facts">
+        <dt>Detects</dt><dd>Extremity fractures</dd>
+        <dt>Ages</dt><dd>Birth to 21</dd>
+        <dt>Next</dt><dd>A multi-reader, multi-case study in 2027</dd>
+      </dl>
+    </div>
+  </article>
+</div>
+<div class="view solid" id="v-services" hidden>
+  <p class="n">Services</p>
+  <h1 class="ch">What we do.</h1>
+  <ul class="svc idx" style="margin-top:clamp(40px,6vw,90px)">
+    <li><canvas class="sg" data-k="0" aria-hidden="true"></canvas><div><h3><a href="#svc-drug-discovery">Machine learning for drug discovery</a></h3><p>From a library of compounds to one worth nominating.</p></div></li>
+    <li><canvas class="sg" data-k="1" aria-hidden="true"></canvas><div><h3><a href="#svc-omics">Omics data analysis</a></h3><p>Find the target, or the biomarker, in the data you already have.</p></div></li>
+    <li><canvas class="sg" data-k="2" aria-hidden="true"></canvas><div><h3><a href="#svc-medical-imaging">Medical imaging AI</a></h3><p>Computer vision for diagnostic imaging and screening.</p></div></li>
+    <li><canvas class="sg" data-k="3" aria-hidden="true"></canvas><div><h3><a href="#svc-medical-device-software">Medical device software</a></h3><p>SaMD and AIaMD, built so a regulator can follow it.</p></div></li>
+    <li><canvas class="sg" data-k="4" aria-hidden="true"></canvas><div><h3><a href="#svc-pipelines">Analytical pipelines and data architecture</a></h3><p>The ground everything else stands on.</p></div></li>
+    <li><canvas class="sg" data-k="5" aria-hidden="true"></canvas><div><h3><a href="#svc-agents">AI agents and workflow integration</a></h3><p>AI tools and agents, inside the work your team already does.</p></div></li>
+    <li><canvas class="sg" data-k="6" aria-hidden="true"></canvas><div><h3><a href="#svc-decision-support">Clinical decision support and research tools</a></h3><p>Tools that help clinicians and scientists read complex data and draft what follows.</p></div></li>
+  </ul>
+</div>
+<div class="view solid" id="v-svc-drug-discovery" hidden>
+  <p class="n"><a href="#services">Services</a></p>
+  <h1 class="ch">Machine learning for drug discovery</h1>
+  <div class="demo" style="margin-top:clamp(40px,6vw,90px);align-items:start">
+    <div>
+      <p class="lead">From a library of compounds to one worth nominating.</p>
+      <ul class="covers"><li>Screening libraries</li><li>Chemical property prediction</li><li>Iterative compound optimisation</li><li>Mechanism of action</li><li>Support through IND-enabling studies, with our network of medicinal chemists, target discoverers and cheminformaticians</li></ul>
+      <p class="out">You leave with <b>a ranked shortlist, and the evidence behind each rank</b></p>
+      
+      <a class="btn" href="#contact" style="margin-top:28px">Bring us one question</a>
+    </div>
+    <canvas class="sg big" data-k="0" aria-hidden="true"></canvas>
+  </div>
+  <div class="more"><span class="n">Also</span><a class="soft" href="#svc-omics">Omics data analysis</a><a class="soft" href="#svc-medical-imaging">Medical imaging AI</a><a class="soft" href="#svc-medical-device-software">Medical device software</a><a class="soft" href="#svc-pipelines">Analytical pipelines and data architecture</a><a class="soft" href="#svc-agents">AI agents and workflow integration</a><a class="soft" href="#svc-decision-support">Clinical decision support and research tools</a></div>
+</div>
+<div class="view solid" id="v-svc-omics" hidden>
+  <p class="n"><a href="#services">Services</a></p>
+  <h1 class="ch">Omics data analysis</h1>
+  <div class="demo" style="margin-top:clamp(40px,6vw,90px);align-items:start">
+    <div>
+      <p class="lead">Find the target, or the biomarker, in the data you already have.</p>
+      <ul class="covers"><li>Genomics, transcriptomics and proteomics</li><li>Target identification</li><li>Biomarker discovery</li><li>Analysis for personalised medicine</li></ul>
+      <p class="out">You leave with <b>a reproducible analysis and a data package you can show</b></p>
+      
+      <a class="btn" href="#contact" style="margin-top:28px">Bring us one question</a>
+    </div>
+    <canvas class="sg big" data-k="1" aria-hidden="true"></canvas>
+  </div>
+  <div class="more"><span class="n">Also</span><a class="soft" href="#svc-drug-discovery">Machine learning for drug discovery</a><a class="soft" href="#svc-medical-imaging">Medical imaging AI</a><a class="soft" href="#svc-medical-device-software">Medical device software</a><a class="soft" href="#svc-pipelines">Analytical pipelines and data architecture</a><a class="soft" href="#svc-agents">AI agents and workflow integration</a><a class="soft" href="#svc-decision-support">Clinical decision support and research tools</a></div>
+</div>
+<div class="view solid" id="v-svc-medical-imaging" hidden>
+  <p class="n"><a href="#services">Services</a></p>
+  <h1 class="ch">Medical imaging AI</h1>
+  <div class="demo" style="margin-top:clamp(40px,6vw,90px);align-items:start">
+    <div>
+      <p class="lead">Computer vision for diagnostic imaging and screening.</p>
+      <ul class="covers"><li>Models for diagnostic imaging</li><li>Image analysis for high-throughput screens</li><li>Testing on data the model has not seen</li></ul>
+      <p class="out">You leave with <b>a model, and a plain account of where it fails</b></p>
+      <p class="out">Case study <b><a href="#case-studies">Paediatric fracture detection</a></b></p>
+      <a class="btn" href="#contact" style="margin-top:28px">Bring us one question</a>
+    </div>
+    <canvas class="sg big" data-k="2" aria-hidden="true"></canvas>
+  </div>
+  <div class="more"><span class="n">Also</span><a class="soft" href="#svc-drug-discovery">Machine learning for drug discovery</a><a class="soft" href="#svc-omics">Omics data analysis</a><a class="soft" href="#svc-medical-device-software">Medical device software</a><a class="soft" href="#svc-pipelines">Analytical pipelines and data architecture</a><a class="soft" href="#svc-agents">AI agents and workflow integration</a><a class="soft" href="#svc-decision-support">Clinical decision support and research tools</a></div>
+</div>
+<div class="view solid" id="v-svc-medical-device-software" hidden>
+  <p class="n"><a href="#services">Services</a></p>
+  <h1 class="ch">Medical device software</h1>
+  <div class="demo" style="margin-top:clamp(40px,6vw,90px);align-items:start">
+    <div>
+      <p class="lead">SaMD and AIaMD, built so a regulator can follow it.</p>
+      <ul class="covers"><li>Software as a medical device</li><li>AI as a medical device</li><li>Evidence built alongside the code</li><li>Reader studies, with our clinical network</li></ul>
+      <p class="out">You leave with <b>the software, and the evidence that goes with it</b></p>
+      <p class="out">Case study <b><a href="#case-studies">Paediatric fracture detection</a></b></p>
+      <a class="btn" href="#contact" style="margin-top:28px">Bring us one question</a>
+    </div>
+    <canvas class="sg big" data-k="3" aria-hidden="true"></canvas>
+  </div>
+  <div class="more"><span class="n">Also</span><a class="soft" href="#svc-drug-discovery">Machine learning for drug discovery</a><a class="soft" href="#svc-omics">Omics data analysis</a><a class="soft" href="#svc-medical-imaging">Medical imaging AI</a><a class="soft" href="#svc-pipelines">Analytical pipelines and data architecture</a><a class="soft" href="#svc-agents">AI agents and workflow integration</a><a class="soft" href="#svc-decision-support">Clinical decision support and research tools</a></div>
+</div>
+<div class="view solid" id="v-svc-pipelines" hidden>
+  <p class="n"><a href="#services">Services</a></p>
+  <h1 class="ch">Analytical pipelines and data architecture</h1>
+  <div class="demo" style="margin-top:clamp(40px,6vw,90px);align-items:start">
+    <div>
+      <p class="lead">The ground everything else stands on.</p>
+      <ul class="covers"><li>Reproducible analysis pipelines</li><li>Data lakes and cloud infrastructure</li><li>Governance and integration</li><li>Legacy system modernisation</li></ul>
+      <p class="out">You leave with <b>pipelines that run without us</b></p>
+      
+      <a class="btn" href="#contact" style="margin-top:28px">Bring us one question</a>
+    </div>
+    <canvas class="sg big" data-k="4" aria-hidden="true"></canvas>
+  </div>
+  <div class="more"><span class="n">Also</span><a class="soft" href="#svc-drug-discovery">Machine learning for drug discovery</a><a class="soft" href="#svc-omics">Omics data analysis</a><a class="soft" href="#svc-medical-imaging">Medical imaging AI</a><a class="soft" href="#svc-medical-device-software">Medical device software</a><a class="soft" href="#svc-agents">AI agents and workflow integration</a><a class="soft" href="#svc-decision-support">Clinical decision support and research tools</a></div>
+</div>
+<div class="view solid" id="v-svc-agents" hidden>
+  <p class="n"><a href="#services">Services</a></p>
+  <h1 class="ch">AI agents and workflow integration</h1>
+  <div class="demo" style="margin-top:clamp(40px,6vw,90px);align-items:start">
+    <div>
+      <p class="lead">AI tools and agents, inside the work your team already does.</p>
+      <ul class="covers"><li>Agentic systems for analysis and reporting</li><li>Integration with your existing stack</li><li>Training for your R&amp;D team</li></ul>
+      <p class="out">You leave with <b>agents in daily use, and a team that can run them</b></p>
+      
+      <a class="btn" href="#contact" style="margin-top:28px">Bring us one question</a>
+    </div>
+    <canvas class="sg big" data-k="5" aria-hidden="true"></canvas>
+  </div>
+  <div class="more"><span class="n">Also</span><a class="soft" href="#svc-drug-discovery">Machine learning for drug discovery</a><a class="soft" href="#svc-omics">Omics data analysis</a><a class="soft" href="#svc-medical-imaging">Medical imaging AI</a><a class="soft" href="#svc-medical-device-software">Medical device software</a><a class="soft" href="#svc-pipelines">Analytical pipelines and data architecture</a><a class="soft" href="#svc-decision-support">Clinical decision support and research tools</a></div>
+</div>
+<div class="view solid" id="v-svc-decision-support" hidden>
+  <p class="n"><a href="#services">Services</a></p>
+  <h1 class="ch">Clinical decision support and research tools</h1>
+  <div class="demo" style="margin-top:clamp(40px,6vw,90px);align-items:start">
+    <div>
+      <p class="lead">Tools that help clinicians and scientists read complex data and draft what follows.</p>
+      <ul class="covers"><li>Language models over clinical and molecular data</li><li>Knowledge graphs for target and drug prioritisation</li><li>Drafting of reports and letters, reviewed by a clinician</li><li>Research tooling for R&amp;D teams</li></ul>
+      <p class="out">You leave with <b>a tool people can use first time</b></p>
+      <p class="out">Case study <b><a href="#case-studies">A tumour board assistant</a></b></p>
+      <a class="btn" href="#contact" style="margin-top:28px">Bring us one question</a>
+    </div>
+    <canvas class="sg big" data-k="6" aria-hidden="true"></canvas>
+  </div>
+  <div class="more"><span class="n">Also</span><a class="soft" href="#svc-drug-discovery">Machine learning for drug discovery</a><a class="soft" href="#svc-omics">Omics data analysis</a><a class="soft" href="#svc-medical-imaging">Medical imaging AI</a><a class="soft" href="#svc-medical-device-software">Medical device software</a><a class="soft" href="#svc-pipelines">Analytical pipelines and data architecture</a><a class="soft" href="#svc-agents">AI agents and workflow integration</a></div>
+</div>
+<div class="view solid" id="v-team" hidden>
+  <p class="n">Team</p>
+  <h1 class="ch">Scientists first.</h1>
+  <div class="people" style="margin-top:clamp(40px,6vw,90px)">
+    <div><h3>Sam McKaylin</h3><span class="n">Co-Founder</span><p>A Cambridge-trained developmental geneticist and machine learning engineer in drug discovery, Sam has founded and helped grow several healthtech companies in precision medicine and AI diagnostics. He also specialises in life sciences private equity and venture due diligence, advising LPs with more than $700bn in assets under management.</p></div>
+    <div><h3>Kristofer Linton-Reid</h3><span class="n">Co-Founder</span><p>A former Schmidt research fellow, Kris develops computer vision for cancer detection at Imperial College London. He is a drug discoverer and highly cited machine learning researcher, and has built products for NHS Scotland.</p></div>
+  </div>
+  <div class="demo" style="margin-top:clamp(56px,8vw,120px);align-items:start">
+    <div><h2 class="tools-h">The network.</h2><p class="t">We bring in the specialist a step needs, when it needs them.</p></div>
+    <ul class="covers"><li>Medicinal chemists</li><li>Target discoverers</li><li>Cheminformaticians</li><li>Clinicians and specialists at leading hospitals and research institutes</li><li>Regulatory specialists</li></ul>
+  </div>
+</div>
+<div class="view solid" id="v-who" hidden>
+  <p class="n">Who we work with</p>
+  <h1 class="ch">We start where you are.</h1>
+  <div class="people three" style="margin-top:clamp(40px,6vw,90px)">
+    <div><h3>Spinouts</h3><p style="margin-top:16px">Brilliant science often works only when one postdoc runs it in one lab. We make yours run outside it: pipelines rebuilt, processing automated, results anyone can reproduce.</p><p class="n" style="margin-top:16px"><a href="#svc-pipelines">Analytical pipelines</a></p></div>
+    <div><h3>Start-ups</h3><p style="margin-top:16px">You have a thesis and a runway. We prototype it, test it against real data and build what the proof earns, so you raise on evidence.</p><p class="n" style="margin-top:16px"><a href="#case-studies">Case studies</a></p></div>
+    <div><h3>Investors</h3><p style="margin-top:16px">The first technical proofs before you fund an incubation, and diligence on the science, the data and the code.</p><p class="n" style="margin-top:16px"><a href="#investors">For investors</a></p></div>
+  </div>
+  <a class="btn" href="#contact" style="margin-top:clamp(32px,5vw,64px)">Bring us one question</a>
+</div>
+<div class="view solid" id="v-investors" hidden>
+  <p class="n">For investors</p>
+  <h1 class="ch">Know before you fund.</h1>
+  <div class="people" style="margin-top:clamp(40px,6vw,90px)">
+    <div><h3>De-risk an incubation</h3><p style="margin-top:16px">Before you fund the build-out, we run the first technical proofs. We staff a step only when it&rsquo;s needed, so it costs less than hiring the team.</p></div>
+    <div><h3>Technical due diligence</h3><p style="margin-top:16px">We read the science, the data and the code. Sam has run diligence for LPs with more than $700bn in assets under management.</p></div>
+  </div>
+  <a class="btn" href="#contact" style="margin-top:clamp(32px,5vw,64px)">Send us the deck</a>
+</div>
+<div class="view solid" id="v-regulatory" hidden>
+  <p class="n">Regulatory</p>
+  <h1 class="ch">Clear about which side of the line.</h1>
+  <div class="people" style="margin-top:clamp(40px,6vw,90px)">
+    <div><p class="status">Regulated</p><h3 style="margin-top:16px">Medical device software</h3><p style="margin-top:16px">SaMD and AIaMD, built with the evidence a submission needs. Our paediatric fracture model is preclinical and heads to a multi-reader, multi-case study in 2027.</p></div>
+    <div><p class="status">Not a medical device</p><h3 style="margin-top:16px">Research tools and decision support</h3><p style="margin-top:16px">Built to the same engineering standard and labelled for what they are. Our tumour board assistant is clinical decision support for research use.</p></div>
+  </div>
+</div>
+<div class="view solid" id="v-oss" hidden>
+  <p class="n">Open source</p>
+  <h1 class="ch">Some of it, we give away.</h1>
+  <div class="people" style="margin-top:clamp(40px,6vw,90px)">
+    <div><h3>tincture</h3><span class="n">In development &middot; GPL-3.0</span><p>A visualisation toolkit for drug discovery that puts interpretability and good design alongside statistical rigour.</p><p class="n" style="margin-top:12px"><a href="https://github.com/SamMckaylin/tincture">View on GitHub</a></p></div>
+  </div>
+</div>
+<div class="view solid" id="v-privacy" hidden>
+  <p class="n">Privacy</p>
+  <h1 class="ch">Privacy.</h1>
+  <p style="margin-top:28px;max-width:38em">This site uses no cookies and no analytics, and it does not collect or store anything you type. The contact form opens your own email app; nothing is sent until you send the email yourself. We use what you send us only to reply to you. Fonts are loaded from Google Fonts, which receives your IP address when the page loads.</p>
+</div>
+<section class="close" id="contact">
+  <div class="cgrid">
+    <div>
+      <h2>Bring us one question.</h2>
+      <p>Our first conversation is always free and you&rsquo;ll come away knowing the easiest path to your next milestone.</p>
+    </div>
+    <form id="ask" novalidate>
+      <label for="f-sci">What&rsquo;s the science?<textarea id="f-sci" rows="3" required></textarea></label>
+      <label for="f-stage">Where are you?<select id="f-stage"><option>Preclinical</option><option>Clinical stage</option><option>Investor looking at a company</option></select></label>
+      <label for="f-prove">What do you need to prove, and by when?<input id="f-prove" type="text"></label>
+            <button class="btn dark" type="submit">Write the email</button>
+      <p class="fnote" id="f-note" aria-live="polite">Or write to us: <a href="mailto:sam@synthesisbioconsulting.com">sam@synthesisbioconsulting.com</a></p>
+    </form>
+  </div>
+</section>
+<footer>
+  <nav class="fnav" aria-label="Site"><a href="#top">Home</a><a href="#case-studies">Work</a><a href="#services">Services</a><a href="#team">Team</a><a href="#who-we-work-with">Who we work with</a><a href="#investors">For investors</a><a href="#regulatory">Regulatory</a><a href="#open-source">Open source</a><a href="#privacy">Privacy</a></nav>
+  <p>Synthesis. Translational AI for life sciences. The animations and the tools are illustrative simulations.</p>
+</footer>
+<script>
+(() => {
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const rng = seed => { let a = seed >>> 0; return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; };
+const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const dpr = () => Math.min(2, window.devicePixelRatio || 1);
+const LIGHT = '#EFE8DD', HL = '#FF6B4A', FOG = '#B3A99B', FILM = '#15110E';
+const ROUTES = {"case-studies": "v-work", "services": "v-services", "team": "v-team", "investors": "v-investors", "who-we-work-with": "v-who", "regulatory": "v-regulatory", "open-source": "v-oss", "privacy": "v-privacy", "svc-drug-discovery": "v-svc-drug-discovery", "svc-omics": "v-svc-omics", "svc-medical-imaging": "v-svc-medical-imaging", "svc-medical-device-software": "v-svc-medical-device-software", "svc-pipelines": "v-svc-pipelines", "svc-agents": "v-svc-agents", "svc-decision-support": "v-svc-decision-support"};
+
+/* ---------- the field: one set of points, redrawn for every stage ---------- */
+const VP = (() => {
+  const c = $('#vpc'), ctx = c.getContext('2d');
+  const N = innerWidth < 860 ? 1000 : 2200, G = 240;
+  const R = rng(11);
+  const g = s => (R() + R() + R() + R() - 2) * s * 1.2;
+  const seg = (P, x1, y1, x2, y2, n, h = 0, j = .002) => { for (let i = 0; i < n; i++) { const t = (i + R() * .7) / n; P.push([x1 + (x2 - x1) * t + g(j), y1 + (y2 - y1) * t + g(j), h]); } };
+  const box = (P, x, y, w, h, n, hl = 0) => { const per = 2 * (w + h); seg(P, x, y, x + w, y, Math.round(n * w / per), hl); seg(P, x + w, y, x + w, y + h, Math.round(n * h / per), hl); seg(P, x + w, y + h, x, y + h, Math.round(n * w / per), hl); seg(P, x, y + h, x, y, Math.round(n * h / per), hl); };
+  const fill = (P, x, y, w, h, n, hl = 0) => { for (let i = 0; i < n; i++) P.push([x + R() * w, y + R() * h, hl]); };
+  const norm = (P, n = N) => {
+    while (P.length < n) { const p = P[Math.floor(R() * P.length)]; P.push([p[0] + g(.003), p[1] + g(.003), p[2]]); }
+    if (P.length > n) { for (let i = P.length - 1; i > 0; i--) { const j = Math.floor(R() * (i + 1)); [P[i], P[j]] = [P[j], P[i]]; } P.length = n; }
+    return P.map(p => [p, p[0] + R() * .12]).sort((a, b) => a[1] - b[1]).map(a => a[0]);
+  };
+  // a bone: mostly outline, some interior
+  const cap = (P, x1, y1, x2, y2, w, n, skip) => { const dx = x2 - x1, dy = y2 - y1, len = Math.hypot(dx, dy), ux = dx / len, uy = dy / len, nx = -uy, ny = ux;
+    for (let i = 0; i < n; i++) { const u = R(), t = R(); let px, py;
+      if (u < .58) { const o = (R() < .5 ? -1 : 1) * w * (.88 + R() * .12); px = x1 + dx * t + nx * o; py = y1 + dy * t + ny * o; }
+      else if (u < .76) { const a = R() * Math.PI, end = R() < .5, sg = end ? 1 : -1, ex = end ? x2 : x1, ey = end ? y2 : y1; px = ex + (ux * Math.sin(a) * sg + nx * Math.cos(a)) * w * .95; py = ey + (uy * Math.sin(a) * sg + ny * Math.cos(a)) * w * .95; }
+      else { const o = (R() * 2 - 1) * w * .8; px = x1 + dx * t + nx * o; py = y1 + dy * t + ny * o; }
+      if (skip) { const tt = ((px - x1) * ux + (py - y1) * uy) / len, off = ((px - x1) * nx + (py - y1) * ny) / w; if (Math.abs(tt - .5 + off * .1) < .035) continue; if (tt > .5) { px += nx * w * .45; py += ny * w * .45; } }
+      P.push([px, py, 0]); } };
+  // every figure is authored in a 1.25 x 1 space
+  const noise = () => { const P = []; fill(P, 0, 0, 1.25, 1, N); return { P: norm(P), L: [] }; };
+  const paper = () => { const P = []; box(P, .36, .03, .53, .88, 260); seg(P, .43, .12, .7, .12, 70); seg(P, .43, .135, .7, .135, 70); seg(P, .43, .15, .7, .15, 70);
+    for (let k = 0; k < 10; k++) { const y = .25 + k * .06, h = (k === 4 || k === 5) ? 1 : 0, x2 = [.82, .8, .82, .74, .82, .79, .82, .8, .82, .62][k]; seg(P, .43, y, x2, y, h ? 120 : 62, h); if (h) seg(P, .43, y + .012, x2, y + .012, 90, 1); }
+    box(P, .405, .47, .44, .1, 150, 1);
+    return { P: norm(P), L: [[.625, .97, 'the claim', 1, 'c']] }; };
+  const pipe = () => { const P = [], X = [.035, .345, .655, .965], W2 = .25, n = [300, 190, 110, 60];
+    X.forEach((x, k) => { box(P, x, .39, W2, .22, 170, k === 3 ? 1 : 0); fill(P, x + .02, .41, W2 - .04, .18, n[k], k === 3 ? 1 : 0); if (k < 3) seg(P, x + W2 + .012, .5, X[k + 1] - .012, .5, 26); });
+    return { P: norm(P), L: [[X[0] + W2 / 2, .68, 'claim', 0, 'c'], [X[1] + W2 / 2, .68, 'data', 0, 'c'], [X[2] + W2 / 2, .68, 'model', 0, 'c'], [X[3] + W2 / 2, .68, 'prototype', 1, 'c']] }; };
+  const grid = () => { const P = [], r = .05, per = Math.max(5, Math.floor(N / 24 / 7.2)), hot = new Set([4, 11, 19]);
+    for (let j = 0; j < 4; j++) for (let i = 0; i < 6; i++) { const cx = .125 + i * .2, cy = .13 + j * .235, h = hot.has(j * 6 + i) ? 1 : 0, V = [...Array(6)].map((_, k) => [cx + r * Math.cos(k * Math.PI / 3), cy + r * Math.sin(k * Math.PI / 3)]);
+      V.forEach((v, k) => { const w = V[(k + 1) % 6]; seg(P, v[0], v[1], w[0], w[1], per, h, .001); }); seg(P, V[0][0], V[0][1], cx + r * 1.75, cy, per, h, .001); }
+    return { P: norm(P), L: [[.625, .985, 'one build, many runs', 0, 'c']] }; };
+  const plot = () => { const P = []; seg(P, .2, .08, .2, .9, 150); seg(P, .2, .9, 1.08, .9, 160);
+    for (let i = 0; i < 46; i++) { const t = i / 45; if (i % 3 < 2) P.push([.2 + t * .88, .9 - t * .82, 1], [.2 + t * .88 + .004, .9 - t * .82 - .004, 1]); }
+    for (let i = 0; i < 520; i++) { const u = R(), v = clamp(u + g(.05), .02, .98); for (let k = 0; k < 2; k++) P.push([.2 + u * .88 + g(.004), .9 - v * .82 + g(.004), 0]); }
+    return { P: norm(P), L: [[.64, .97, 'predicted', 0, 'c'], [.215, .04, 'observed', 0, 'l'], [1.08, .2, 'real data', 1, 'r']] }; };
+  const M = { cx: .62, cy: .5, r: .14 };
+  const molBase = () => { const P = [], { cx, cy, r } = M, V = [...Array(6)].map((_, k) => [cx + r * Math.cos(k * Math.PI / 3), cy + r * Math.sin(k * Math.PI / 3)]);
+    V.forEach((v, k) => { const w = V[(k + 1) % 6]; seg(P, v[0], v[1], w[0], w[1], 90); if (k % 2 === 0) { const q = .2; seg(P, v[0] + (cx - v[0]) * q, v[1] + (cy - v[1]) * q, w[0] + (cx - w[0]) * q, w[1] + (cy - w[1]) * q, 66); } });
+    const Nn = [cx + 2 * r, cy], C = [Nn[0] + r * .5, Nn[1] - r * .866], O = [C[0] - r * .5, C[1] - r * .866], Me = [C[0] + r, C[1]];
+    seg(P, V[0][0], V[0][1], Nn[0] - .042, Nn[1], 76); seg(P, Nn[0] + .02, Nn[1] - .038, C[0], C[1], 76); seg(P, C[0], C[1], Me[0], Me[1], 90);
+    seg(P, C[0] + .011, C[1] - .007, O[0] + .032, O[1] + .031, 70); seg(P, C[0] - .011, C[1] + .007, O[0] + .009, O[1] + .045, 70);
+    return { P: norm(P), L: [[Nn[0], Nn[1], 'N', 0, 'c', 1], [Nn[0], Nn[1] + .07, 'H', 0, 'c', 1], [O[0], O[1], 'O', 0, 'c', 1]] }; };
+  // a crowd, then the same people sorted into a study cohort (same index = same person)
+  const cols = Math.round(Math.sqrt(N * 1.25)), rows = Math.ceil(N / cols), CR = [], CO = []; let mk = 0;
+  for (let i = 0; i < N; i++) { const col = Math.floor(i / rows), row = i % rows, x = .02 + (col + .5) / cols * 1.21 + g(.008), y = .04 + (row + .5) / rows * .9 + g(.008); CR.push([x, y, 0]);
+    if (R() < .24) { const k = mk++; CO.push([.87 + (k % 15) * .0245 + g(.002), .2 + Math.floor(k / 15) * .0245 + g(.002), 1]); } else CO.push([x * .64, y, 2]); }
+  const crowd = { P: CR, L: [[.02, .99, 'patients', 0, 'l']] };
+  const cohort = { P: CO, L: [['rect', .85, .17, .395, Math.ceil(mk / 15) * .0245 + .055], [.85, .13, 'study cohort', 1, 'l'], [.02, .99, 'patients', 0, 'l']] };
+  const hand = () => { const P = [], B = [
+      [.55, 1.0, .56, .8, .048, 150], [.7, 1.0, .69, .82, .034, 110],
+      [.5, .69, .42, .58, .02, 60], [.555, .655, .52, .47, .019, 86], [.61, .65, .605, .45, .019, 90], [.66, .655, .685, .47, .018, 86], [.705, .665, .755, .51, .017, 84, 1],
+      [.41, .56, .36, .47, .017, 50], [.355, .455, .325, .39, .015, 36],
+      [.515, .455, .495, .35, .016, 50], [.493, .338, .48, .27, .014, 36], [.478, .26, .47, .21, .012, 26],
+      [.604, .435, .602, .32, .016, 54], [.602, .308, .6, .23, .014, 38], [.6, .22, .599, .165, .012, 28],
+      [.688, .455, .705, .345, .015, 50], [.707, .333, .718, .265, .013, 36], [.72, .255, .727, .205, .011, 26],
+      [.76, .495, .79, .41, .014, 42], [.793, .4, .81, .35, .012, 28], [.812, .34, .823, .3, .01, 22]];
+    const k = N / 1500; B.forEach(b => cap(P, b[0], b[1], b[2], b[3], b[4], Math.round(b[5] * k), b[6]));
+    [[.53, .75], [.59, .76], [.65, .76], [.7, .75], [.55, .705], [.605, .7], [.66, .7], [.71, .71]].forEach(([x, y]) => { for (let i = 0; i < 26 * k; i++) { const a = R() * 6.283, rr = .021 * (R() < .7 ? .9 + R() * .1 : R()); P.push([x + Math.cos(a) * rr * 1.15, y + Math.sin(a) * rr, 0]); } });
+    box(P, .685, .535, .1, .11, 120, 1);
+    return { P: norm(P), L: [[.8, .585, 'fracture flagged', 1, 'l']] }; };
+  const SH = [noise(), paper(), plot(), molBase()], HAND = hand(), PIPE = pipe(), GRID = grid();
+
+  // the group that changes on the molecule: its own small set of points
+  const glyph = (P, txt, ax, ay, n, align = 'c') => { const o = document.createElement('canvas'); o.width = 320; o.height = 110; const x = o.getContext('2d'); x.font = '700 84px "Bricolage Grotesque", Arial, sans-serif'; x.textBaseline = 'middle'; x.textAlign = align === 'r' ? 'right' : 'center'; const anchor = align === 'r' ? 310 : 160; x.fillText(txt, anchor, 58);
+    const d = x.getImageData(0, 0, 320, 110).data, px = []; for (let j = 0; j < 110; j += 2) for (let i = 0; i < 320; i += 2) if (d[(j * 320 + i) * 4 + 3] > 140) px.push([i, j]);
+    const k = M.r * .95 / 84; for (let i = 0; i < n && px.length; i++) { const p = px[Math.floor(R() * px.length)]; P.push([ax + (p[0] - anchor) * k, ay + (p[1] - 58) * k, 0]); } };
+  const VARS = ['F', 'OMe', 'Cl', 'OEt', 'OH'], VC = {};
+  const variant = name => { if (VC[name]) return VC[name]; const P = [], { cx, cy, r } = M, V3 = [cx - r, cy], Ol = [cx - 2 * r, cy], C1 = [Ol[0] - r * .5, Ol[1] - r * .866];
+    if (name === 'F') { seg(P, V3[0], V3[1], Ol[0] + .035, Ol[1], 80); glyph(P, 'F', Ol[0], Ol[1], 150); }
+    if (name === 'Cl') { seg(P, V3[0], V3[1], Ol[0] + .055, Ol[1], 70); glyph(P, 'Cl', Ol[0], Ol[1], 165); }
+    if (name === 'OH') { seg(P, V3[0], V3[1], Ol[0] + .045, Ol[1], 70); glyph(P, 'HO', Ol[0] + .035, Ol[1], 170, 'r'); }
+    if (name === 'OMe' || name === 'OEt') { seg(P, V3[0], V3[1], Ol[0] + .042, Ol[1], 60); glyph(P, 'O', Ol[0], Ol[1], 90); seg(P, Ol[0] - .02, Ol[1] - .036, C1[0], C1[1], 44); if (name === 'OEt') seg(P, C1[0], C1[1], C1[0] - r, C1[1], 46); }
+    return VC[name] = norm(P, G); };
+  const gc = new Float32Array(G * 2), gs = new Float32Array(G * 2), gh = new Float32Array(G * 2), gd = new Float32Array(G * 2);
+  let gt = null, gv = -1, g0 = 0, gsw = false, galpha = 0, ghot = true, ground = 0, gon = false;
+  const gnext = () => { gv = (gv + 1) % VARS.length; ground++; gt = variant(VARS[gv]); for (let i = 0; i < G; i++) { const a = R() * 6.283, d = .05 + R() * .16; gs[i * 2] = gt[i][0] + Math.cos(a) * d; gs[i * 2 + 1] = gt[i][1] + Math.sin(a) * d; } };
+  function gstep(now) { if (RM) return; let dt = now - g0;
+    if (dt >= 2900) { g0 = now; dt = 0; gsw = false; gh.set(gc); for (let i = 0; i < G; i++) { const a = R() * 6.283; gd[i * 2] = Math.cos(a); gd[i * 2 + 1] = Math.sin(a); } }
+    if (dt < 480) { const e = ease(dt / 480); for (let i = 0; i < G * 2; i++) gc[i] = gh[i] + gd[i] * e * .09; galpha = 1 - e; ghot = false; }
+    else { if (!gsw) { gnext(); gsw = true; } const e = ease(clamp((dt - 480) / 1050)); for (let i = 0; i < G; i++) { gc[i * 2] = gs[i * 2] + (gt[i][0] - gs[i * 2]) * e; gc[i * 2 + 1] = gs[i * 2 + 1] + (gt[i][1] - gs[i * 2 + 1]) * e; } galpha = e; ghot = dt < 2200; } }
+
+  const delay = Float32Array.from({ length: N }, () => R() * .3);
+  const from = new Float32Array(N * 2), cur = new Float32Array(N * 2), fh = new Uint8Array(N), ch = new Uint8Array(N);
+  let tgt = SH[0], stage = 0, t0 = -1e6, raf = 0, W = 0, H = 0, T = 1, timers = [];
+  const ptr = { x: -999, y: -999, k: 0, at: -1e6 };
+  tgt.P.forEach((p, i) => { cur[i * 2] = p[0]; cur[i * 2 + 1] = p[1]; ch[i] = p[2]; });
+  function resize() { const r = c.getBoundingClientRect(), d = dpr(); W = r.width; H = r.height; c.width = Math.round(W * d); c.height = Math.round(H * d); ctx.setTransform(d, 0, 0, d, 0, 0); draw(); }
+  function draw() {
+    if (!W) return;
+    ctx.fillStyle = FILM; ctx.fillRect(0, 0, W, H);
+    const wide = W >= 860, s = wide ? Math.min(W * .46 / 1.25, H * .64) : Math.min(W * .88 / 1.25, H * .32), ox = wide ? W * .47 + (W * .5 - 1.25 * s) / 2 : (W - 1.25 * s) / 2, oy = wide ? (H - s) / 2 : H * .1, sz = Math.max(1.6, s / 300);
+    const push = stage === 0 && ptr.k > .01, PR = 130;
+    for (let pass = 0; pass < 3; pass++) { ctx.fillStyle = pass === 1 ? HL : LIGHT; ctx.globalAlpha = pass === 2 ? .26 : pass ? 1 : .86;
+      for (let i = 0; i < N; i++) if (ch[i] === pass) { let x = ox + cur[i * 2] * s, y = oy + cur[i * 2 + 1] * s;
+        if (push) { const dx = x - ptr.x, dy = y - ptr.y, d = Math.hypot(dx, dy); if (d < PR && d > .01) { const f = Math.pow(1 - d / PR, 2) * 18 * ptr.k; x += dx / d * f; y += dy / d * f; } }
+        ctx.fillRect(x, y, sz, sz); } }
+    if (gon && gt) { ctx.globalAlpha = galpha * clamp((T - .5) / .5); ctx.fillStyle = ghot ? HL : LIGHT; for (let i = 0; i < G; i++) ctx.fillRect(ox + gc[i * 2] * s, oy + gc[i * 2 + 1] * s, sz, sz);
+      ctx.globalAlpha = clamp((T - .8) / .2); ctx.fillStyle = ghot ? HL : LIGHT; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.font = `500 ${Math.max(10.5, Math.min(14, s * .036))}px "DM Mono", monospace`; ctx.fillText(`ROUND 0${(ground - 1) % 9 + 1}  ${galpha < .98 ? 'PROPOSED' : ghot ? 'TESTED' : 'KEPT'}`, ox + M.cx * s, oy + .93 * s); }
+    const al = clamp((T - .8) / .2); if (al > 0) { ctx.globalAlpha = al; ctx.textBaseline = 'middle';
+      tgt.L.forEach(l => { if (l[0] === 'rect') { ctx.strokeStyle = HL; ctx.lineWidth = 1.5; ctx.strokeRect(ox + l[1] * s, oy + l[2] * s, l[3] * s, l[4] * s); return; }
+        const [x, y, t, hl, al2, atom] = l; ctx.font = atom ? `500 ${Math.max(15, s * .085)}px "Bricolage Grotesque", Arial, sans-serif` : `500 ${Math.max(10.5, Math.min(14, s * .036))}px "DM Mono", monospace`; ctx.textAlign = al2 === 'c' ? 'center' : al2 === 'r' ? 'right' : 'left'; if (atom) { const w = ctx.measureText(t).width; ctx.fillStyle = FILM; ctx.fillRect(ox + x * s - w / 2 - 3, oy + y * s - s * .045, w + 6, s * .09); } ctx.fillStyle = hl ? HL : LIGHT; ctx.fillText(atom ? t : t.toUpperCase(), ox + x * s, oy + y * s); }); }
+    ctx.globalAlpha = 1;
+  }
+  function tick(now) {
+    if (T < 1) { T = clamp((now - t0) / 1300); const P = tgt.P; for (let i = 0; i < N; i++) { const e = ease(clamp((T - delay[i]) / .7)); cur[i * 2] = from[i * 2] + (P[i][0] - from[i * 2]) * e; cur[i * 2 + 1] = from[i * 2 + 1] + (P[i][1] - from[i * 2 + 1]) * e; ch[i] = e > .5 ? P[i][2] : fh[i]; } }
+    if (gon) gstep(now);
+    ptr.k += ((now - ptr.at < 1400 ? 1 : 0) - ptr.k) * .1;
+    draw();
+    raf = (T < 1 || gon || (stage === 0 && ptr.k > .01)) ? requestAnimationFrame(tick) : 0;
+  }
+  const kick = () => { if (!raf) raf = requestAnimationFrame(tick); };
+  const snap = sh => { tgt = sh; sh.P.forEach((p, i) => { cur[i * 2] = p[0]; cur[i * 2 + 1] = p[1]; ch[i] = p[2]; }); T = 1; draw(); };
+  const to = sh => { from.set(cur); fh.set(ch); tgt = sh; t0 = performance.now(); T = 0; kick(); };
+  function go(k) {
+    if (k === stage) return; stage = k; timers.forEach(clearTimeout); timers = []; gon = false;
+    if (RM) { if (k === 1) { gt = variant('OH'); gt.forEach((p, i) => { gc[i * 2] = p[0]; gc[i * 2 + 1] = p[1]; }); galpha = 1; ghot = false; ground = 3; gon = true; g0 = 1e15; } snap(k === 4 ? HAND : k === 3 ? GRID : k === 1 ? SH[3] : SH[k]); return; }
+    if (k === 1) { const loop = () => { gon = false; to(SH[1]); timers.push(setTimeout(() => to(PIPE), 2800), setTimeout(() => { to(SH[3]); gon = true; gv = -1; ground = 0; g0 = performance.now() - 480; gsw = false; galpha = 0; }, 5800), setTimeout(loop, 15600)); }; loop(); }
+    else if (k === 3) { to(SH[3]); timers.push(setTimeout(() => to(GRID), 1500)); }
+    else if (k === 4) { const loop = () => { to(crowd); timers.push(setTimeout(() => to(cohort), 3000), setTimeout(() => to(HAND), 6000), setTimeout(loop, 13500)); }; loop(); }
+    else to(SH[k]);
+  }
+  if (!RM && matchMedia('(hover: hover)').matches) addEventListener('pointermove', e => { ptr.x = e.clientX; ptr.y = e.clientY; ptr.at = performance.now(); if (stage === 0) kick(); }, { passive: true });
+  const heads = $$('.step,.rst').map(el => [el.querySelector('h1,h2') || el, +el.dataset.i]);
+  let sq = 0;
+  const pick = () => { sq = 0; if (document.body.classList.contains('cs')) return; const vh = innerHeight, line = vh * .62; let best = -1, bd = 1e9;
+    heads.forEach(([h, k]) => { const r = h.getBoundingClientRect(); if (r.bottom < 0 || r.top > vh) return; const d = Math.abs((r.top + r.bottom) / 2 - line); if (d < bd) { bd = d; best = k; } });
+    if (best >= 0) go(best); };
+  addEventListener('scroll', () => { if (!sq) sq = requestAnimationFrame(pick); }, { passive: true });
+  addEventListener('hashchange', () => setTimeout(pick, 60));
+  pick();
+  resize();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { for (const k in VC) delete VC[k]; resize(); });
+  return { resize };
+})();
+
+/* ---------- four small loops for the examples ---------- */
+(() => {
+  const cs = $$('.ex canvas'); if (!cs.length) return;
+  const R = rng(21), rnd = n => [...Array(n)].map(() => [R(), R(), R()]);
+  const hits = new Set([17, 30, 44, 61, 75, 83, 98]), A = rnd(34), D = rnd(30);
+  let raf = 0, on = false;
+  function draw(now) {
+    const p = RM ? .97 : (now / 1000 % 5.2) / 5.2;
+    cs.forEach((c, k) => { const r = c.getBoundingClientRect(), d = dpr(); if (!r.width) return; if (c.width !== Math.round(r.width * d)) { c.width = Math.round(r.width * d); c.height = Math.round(r.height * d); }
+      const x = c.getContext('2d'); x.setTransform(d, 0, 0, d, 0, 0); const W = r.width, H = r.height, z = 3; x.clearRect(0, 0, W, H);
+      const dot = (u, v, col, a = 1, s = z) => { x.globalAlpha = a; x.fillStyle = col; x.fillRect(u * W - s / 2, v * H - s / 2, s, s); };
+      if (k === 0) { const sw = p * 1.35 * 14; for (let j = 0; j < 8; j++) for (let i = 0; i < 14; i++) { const id = j * 14 + i, done = i < sw; dot(.08 + i / 13 * .84, .14 + j / 7 * .72, done && hits.has(id) ? HL : LIGHT, done ? (hits.has(id) ? 1 : .7) : .22, done && hits.has(id) ? 6 : z); } }
+      if (k === 1) { [.22, .5, .78].forEach((u, i) => { x.globalAlpha = .9; x.strokeStyle = i === 1 ? HL : LIGHT; x.lineWidth = 1.5; x.strokeRect(u * W - W * .075, .5 * H - H * .14, W * .15, H * .28); });
+        A.forEach(a => { const u = (p + a[0]) % 1, sp = u < .2 ? 1 - u / .2 : 0; dot(.02 + u * .96, .5 + (a[1] - .5) * .66 * sp, u > .5 ? HL : LIGHT, .85); }); }
+      if (k === 2) { for (let i = 0; i < 46; i++) { const u = i / 45; if (Math.abs(u - .62) < .012) continue; const y = .5 - Math.sin(u * 3.1) * .06 + (u > .62 ? .03 : 0); dot(.06 + u * .88, y - .09, LIGHT, .75); dot(.06 + u * .88, y + .09, LIGHT, .75); }
+        const q = clamp(p * 1.6); if (q < 1) { x.globalAlpha = .9; x.fillStyle = HL; x.fillRect(q * W, .1 * H, 2, .8 * H); } if (q > .66) { x.globalAlpha = 1; x.strokeStyle = HL; x.lineWidth = 2; x.strokeRect(.52 * W, .26 * H, .2 * W, .52 * H); } }
+      if (k === 3) { const q = clamp(p * 1.5); [[.3, .55], [.5, .95], [.7, .4]].forEach(([y, len], i) => { const n = Math.round(22 * len * q), top = i === 1 && q >= 1; for (let j = 0; j < n; j++) dot(.08 + j / 22 * .78, y, top ? HL : LIGHT, i === 1 ? 1 : .6, top ? 4 : z); });
+        if (q >= 1) { x.globalAlpha = 1; x.strokeStyle = HL; x.lineWidth = 2; x.strokeRect(.04 * W, .5 * H - .09 * H, .92 * W, .18 * H); } }
+      x.globalAlpha = 1; });
+    raf = on && !RM ? requestAnimationFrame(draw) : 0;
+  }
+  new IntersectionObserver(es => { on = es[0].isIntersecting; if (on && !raf) raf = requestAnimationFrame(draw); }).observe($('.ex'));
+  if (RM) requestAnimationFrame(draw);
+})();
+/* ---------- instrument B: a synthetic radiograph and a scripted detector ---------- */
+(() => {
+  const c = $('#x-c'), x = c.getContext('2d'), IW = 240, IH = 300;
+  const off = document.createElement('canvas'); off.width = IW; off.height = IH; const ox = off.getContext('2d'), img = ox.createImageData(IW, IH);
+  const STUDIES = [{ bone: 0, tf: .66, conf: .94 }, { bone: 1, tf: .4, conf: .88 }, { bone: -1 }];
+  let si = 0, F = null, found = null, anim = 0, scan = -1, cands = [];
+  const sm = (a, b, v) => { const t = clamp((v - a) / (b - a)); return t * t * (3 - 2 * t); };
+  function gen() {
+    const S = STUDIES[si], R = rng(40 + si * 9); F = new Float32Array(IW * IH); found = null;
+    const centre = [t => 98 + 12 * (t - .5) + 5 * Math.sin(t * 3 + si), t => 150 + 5 * Math.sin(t * 2.4 + si * 2)], half = [t => 12 + 6 * t * t, t => 11 - 3 * t + 5 * Math.pow(1 - t, 4)];
+    for (let y = 0; y < IH; y++) { const t = y / IH;
+      for (let px = 0; px < IW; px++) {
+        const tc = 122 + 6 * Math.sin(t * 2), tw = 86 - 16 * t, d = Math.abs(px - tc) / tw; let v = .05 + .2 * (1 - sm(.82, 1.02, d)) * (1 - .25 * d * d);
+        for (let b = 0; b < 2; b++) { let xc = centre[b](t), hw = half[b](t), yf = 0, hit = S.bone === b;
+          if (hit) { yf = S.tf * IH + (px - xc) * .55; if (y > yf) xc += 2.6; }
+          const e = Math.abs(px - xc) / hw; if (e < 1.12) { let bv = (.44 + .34 * Math.pow(clamp(e), 2.6)) * (1 - sm(.96, 1.12, e)); if (hit && Math.abs(y - yf) < 1.5 && e < 1.05) bv *= .5; v = Math.max(v, v * .55 + bv); } }
+        F[y * IW + px] = clamp(v + (R() - .5) * .05);
+      } }
+    if (S.bone >= 0) { const y = S.tf * IH; found = { x: centre[S.bone](S.tf) - 27, y: y - 24, w: 56, h: 48, conf: S.conf }; }
+    cands = []; scan = -1; user = null; shown = false; win(); render(); hint();
+  }
+  let shown = false, user = null, drag = null;
+  const coarse = matchMedia('(pointer: coarse)').matches;
+  const pos = e => { const r = c.getBoundingClientRect(); return [(e.clientX - r.left) / r.width * IW, (e.clientY - r.top) / r.height * IH]; };
+  const hint = () => { $('#x-status').textContent = user ? 'Marked. Now ask the detector.' : `Study ${si + 1} of 3. See a fracture? ${coarse ? 'Tap it.' : 'Box it.'}`; };
+  const iou = (a, b) => { const x1 = Math.max(a.x, b.x), y1 = Math.max(a.y, b.y), x2 = Math.min(a.x + a.w, b.x + b.w), y2 = Math.min(a.y + a.h, b.y + b.h), i = Math.max(0, x2 - x1) * Math.max(0, y2 - y1); return i / (a.w * a.h + b.w * b.h - i); };
+  function verdict() { let h;
+    if (found && user) h = iou(found, user) > .12 ? '<b>You and the detector agree.</b>' : '<b>You and the detector disagree.</b>';
+    else if (found) h = `<b>Finding flagged</b>, simulated confidence ${found.conf.toFixed(2)}.`;
+    else h = user ? '<b>The detector flagged nothing here.</b>' : '<b>No finding flagged.</b>';
+    $('#x-status').innerHTML = h; }
+  if (coarse) c.addEventListener('click', e => { const [px, py] = pos(e); user = { x: px - 28, y: py - 24, w: 56, h: 48 }; shown = false; render(); hint(); });
+  else {
+    c.addEventListener('pointerdown', e => { drag = pos(e); c.setPointerCapture(e.pointerId); user = null; shown = false; render(); });
+    c.addEventListener('pointermove', e => { if (!drag) return; const [px, py] = pos(e); user = { x: Math.min(drag[0], px), y: Math.min(drag[1], py), w: Math.abs(px - drag[0]), h: Math.abs(py - drag[1]) }; render(); });
+    c.addEventListener('pointerup', () => { if (!drag) return; drag = null; if (user && (user.w < 6 || user.h < 6)) user = null; render(); hint(); });
+  }
+  function win() { const W = .78, L = .46, lo = L - W / 2, d = img.data; for (let i = 0; i < F.length; i++) { const v = Math.round(clamp((F[i] - lo) / W) * 255); d[i * 4] = v; d[i * 4 + 1] = v; d[i * 4 + 2] = Math.min(255, v + 4); d[i * 4 + 3] = 255; } ox.putImageData(img, 0, 0); }
+  function render() {
+    const s = c.width / IW; x.imageSmoothingEnabled = true; x.drawImage(off, 0, 0, c.width, c.height);
+    x.font = '500 13px "DM Mono", monospace'; x.textBaseline = 'top'; x.fillStyle = FOG; x.textAlign = 'left'; x.fillText('STUDY ' + (si + 1) + ' / 3', 14, c.height - 28); x.textAlign = 'right'; x.fillText('AP · SYNTHETIC', c.width - 14, c.height - 28);
+    x.fillRect(c.width - 114, 22, 100, 2); x.fillRect(c.width - 114, 16, 2, 14); x.fillRect(c.width - 16, 16, 2, 14); x.fillText('SCALE', c.width - 14, 34);
+    cands.forEach(b => { x.strokeStyle = FOG; x.lineWidth = 1.5; x.setLineDash([5, 5]); x.strokeRect(b.x * s, b.y * s, b.w * s, b.h * s); }); x.setLineDash([]);
+    if (scan >= 0) { x.fillStyle = HL; x.globalAlpha = .9; x.fillRect(0, scan * c.height, c.width, 3); x.globalAlpha = 1; }
+    if (user) { x.strokeStyle = LIGHT; x.lineWidth = 2.5; x.strokeRect(user.x * s, user.y * s, user.w * s, user.h * s); x.fillStyle = LIGHT; x.textAlign = 'left'; x.font = '500 13px "DM Mono", monospace'; x.fillText('YOU', user.x * s + 2, (user.y + user.h) * s + 6); }
+    if (shown && found) { const b = found; x.strokeStyle = HL; x.lineWidth = 3; x.strokeRect(b.x * s, b.y * s, b.w * s, b.h * s); x.fillStyle = HL; x.fillRect(b.x * s - 1.5, b.y * s - 26, 132, 26); x.fillStyle = '#15110E'; x.textAlign = 'left'; x.font = '600 14px "DM Mono", monospace'; x.fillText('FINDING ' + b.conf.toFixed(2), b.x * s + 7, b.y * s - 20); }
+  }
+  function done() { scan = -1; cands = []; shown = true; render(); verdict(); $('#x-run').disabled = false; }
+  function run() {
+    if (anim) return; shown = false; $('#x-run').disabled = true; $('#x-status').textContent = 'Reading the study…';
+    if (RM) return done();
+    const t0 = performance.now(), R = rng(99 + si), boxes = [...Array(5)].map(() => ({ x: 60 + R() * 110, y: 30 + R() * 220, w: 36 + R() * 24, h: 30 + R() * 22, at: R() }));
+    const f = now => { const t = (now - t0) / 1700; scan = clamp(t); cands = boxes.filter(b => Math.abs(b.at - t) < .12 && (b.y + b.h / 2) / IH < t + .05); render(); if (t < 1) anim = requestAnimationFrame(f); else { anim = 0; done(); } };
+    anim = requestAnimationFrame(f);
+  }
+  $('#x-run').addEventListener('click', run);
+  $('#x-next').addEventListener('click', () => { if (anim) { cancelAnimationFrame(anim); anim = 0; $('#x-run').disabled = false; } si = (si + 1) % STUDIES.length; gen(); });
+  gen();
+})();
+
+/* ---------- tool switcher, scripted assistant, combination matrix ---------- */
+(() => {
+  const tabs = $$('.tabs button');
+  const show = t => { tabs.forEach(b => b.setAttribute('aria-selected', String(b.dataset.t === t))); ['rad', 'chat', 'combo'].forEach(k => { $('#t-' + k).hidden = k !== t; $('#ctl-' + k).hidden = k !== t; }); if (t === 'combo') CB.draw(); };
+  tabs.forEach(b => b.addEventListener('click', () => show(b.dataset.t)));
+
+  // a scripted assistant over a synthetic record
+  const QA = [['Summarise the imaging.', 'One forearm study on file. The detector flagged a possible fracture of the distal radius, simulated confidence 0.94. There is no earlier imaging to compare.', 'Source: study 1 report'],
+              ['What is missing from the record?', 'No blood results in the last 12 months. No medication list. Allergy status is not recorded.', 'Source: record audit'],
+              ['Draft a line for the clinic letter.', 'Draft: \u201cImaging shows a possible distal radius fracture, flagged for review.\u201d Please edit before sending.', 'Source: study 1 report']];
+  const box = $('#ch-msgs'), qs = $$('.q'); let busy = false;
+  const add = (cls, txt) => { const p = document.createElement('p'); p.className = cls; p.textContent = txt; box.appendChild(p); box.scrollTop = box.scrollHeight; return p; };
+  qs.forEach(b => b.addEventListener('click', () => { if (busy) return; busy = true; qs.forEach(q => q.disabled = true); const [q, a, src] = QA[+b.dataset.q]; add('me', q); const p = add('bot', '');
+    const fin = () => { p.textContent = a; const s = document.createElement('small'); s.textContent = src; p.appendChild(s); box.scrollTop = box.scrollHeight; busy = false; qs.forEach(q => q.disabled = false); };
+    if (RM) return fin(); let i = 0; const t = setInterval(() => { i += 2; p.textContent = a.slice(0, i); box.scrollTop = box.scrollHeight; if (i >= a.length) { clearInterval(t); fin(); } }, 18); }));
+
+  // a dose matrix for two compounds: simulated single-agent curves plus an interaction term
+  const CB = (() => {
+    const c = $('#cb-c'), x = c.getContext('2d'), D = [0, .01, .1, 1, 10, 100], NAMES = ['A', 'B', 'C'];
+    const PAR = [{ ec: 1, mx: .8 }, { ec: 5, mx: .7 }, { ec: .3, mx: .6 }], PAIRS = [[0, 1, .38], [0, 2, 0], [1, 2, -.3]];
+    const hill = (d, p) => d === 0 ? 0 : p.mx * d / (d + p.ec), R = rng(77), NZ = [...Array(36)].map(() => (R() - .5) * .04);
+    let pair = 0, syn = false, sel = [3, 4], shownV = new Float32Array(36), fromV = new Float32Array(36), t0 = 0, raf = 0;
+    const cell = (i, j) => { const [a, b, gm] = PAIRS[pair], ea = hill(D[i], PAR[a]), eb = hill(D[j], PAR[b]), bl = ea + eb - ea * eb, k = Math.sqrt(ea * eb); const ob = clamp(bl + (gm > 0 ? gm * k * (1 - bl) : gm * k * bl) + (ea && eb ? NZ[i * 6 + j] : 0)); return { ob, bl, ex: ob - bl }; };
+    const mix = (a, b, t) => { const h = v => [1, 3, 5].map(i => parseInt(v.slice(i, i + 2), 16)), A = h(a), B = h(b); return 'rgb(' + A.map((v, i) => Math.round(v + (B[i] - v) * clamp(t))).join(',') + ')'; };
+    const val = (i, j) => { const q = cell(i, j); return syn ? q.ex : q.ob; };
+    const dose = d => d === 0 ? '0' : String(d);
+    function say() { const [i, j] = sel, [a, b] = PAIRS[pair], q = cell(i, j), pc = v => Math.round(v * 100); $('#cb-status').innerHTML = `${NAMES[a]} ${dose(D[i])} \u00b5M + ${NAMES[b]} ${dose(D[j])} \u00b5M: observed ${pc(q.ob)}%, expected ${pc(q.bl)}% if independent. <b>${q.ex >= 0 ? '+' : '\u2212'}${Math.abs(pc(q.ex))} points.</b> Simulated.`; }
+    function draw(now) {
+      const r = c.getBoundingClientRect(), d = dpr(); if (!r.width) return; if (c.width !== Math.round(r.width * d)) { c.width = Math.round(r.width * d); c.height = Math.round(r.height * d); }
+      x.setTransform(d, 0, 0, d, 0, 0); const W = r.width, H = r.height, e = RM || !t0 ? 1 : ease(clamp((now - t0) / 450)), [a, b] = PAIRS[pair];
+      x.fillStyle = '#0D0A08'; x.fillRect(0, 0, W, H);
+      const m = Math.min(W - 78, H - 150), gx = 58, gy = (H - m) / 2 - 6, cs = m / 6;
+      x.textBaseline = 'middle'; x.font = `400 ${Math.max(10, cs * .2)}px "DM Mono", monospace`;
+      for (let i = 0; i < 6; i++) for (let j = 0; j < 6; j++) { const k = i * 6 + j, v = fromV[k] + (val(i, j) - fromV[k]) * e; shownV[k] = v; const cx = gx + j * cs, cy = gy + (5 - i) * cs;
+        x.fillStyle = syn ? (v >= 0 ? mix('#241D18', HL, v / .35) : mix('#241D18', '#7FA3B0', -v / .35)) : mix('#241D18', HL, v); x.fillRect(cx + 1.5, cy + 1.5, cs - 3, cs - 3);
+        if (cs > 40) { x.fillStyle = Math.abs(v) > (syn ? .2 : .55) ? FILM : LIGHT; x.textAlign = 'center'; x.fillText((syn && v > 0 ? '+' : '') + Math.round(v * 100), cx + cs / 2, cy + cs / 2); } }
+      x.strokeStyle = LIGHT; x.lineWidth = 2; x.strokeRect(gx + sel[1] * cs + 1, gy + (5 - sel[0]) * cs + 1, cs - 2, cs - 2);
+      x.fillStyle = FOG; x.font = '400 11px "DM Mono", monospace';
+      D.forEach((dv, k) => { x.textAlign = 'center'; x.fillText(dose(dv), gx + k * cs + cs / 2, gy + m + 14); x.textAlign = 'right'; x.fillText(dose(dv), gx - 8, gy + (5 - k) * cs + cs / 2); });
+      x.textAlign = 'center'; x.fillText(`COMPOUND ${NAMES[b]} (\u00b5M)`, gx + m / 2, gy + m + 36);
+      x.save(); x.translate(14, gy + m / 2); x.rotate(-Math.PI / 2); x.fillText(`COMPOUND ${NAMES[a]} (\u00b5M)`, 0, 0); x.restore();
+      x.textAlign = 'left'; x.fillStyle = LIGHT; x.fillText(syn ? 'EXCESS OVER INDEPENDENCE, POINTS' : 'INHIBITION, %', gx, gy - 18);
+      c.dataset.geo = [gx, gy, cs].join(',');
+      raf = e < 1 ? requestAnimationFrame(draw) : 0;
+    }
+    const kick = () => { fromV.set(shownV); t0 = performance.now(); if (!raf) raf = requestAnimationFrame(draw); say(); };
+    const pick = ev => { const r = c.getBoundingClientRect(), [gx, gy, cs] = (c.dataset.geo || '0,0,1').split(',').map(Number), j = Math.floor((ev.clientX - r.left - gx) / cs), i = 5 - Math.floor((ev.clientY - r.top - gy) / cs); if (i < 0 || i > 5 || j < 0 || j > 5 || (i === sel[0] && j === sel[1])) return; sel = [i, j]; say(); if (!raf) draw(performance.now()); };
+    c.addEventListener('pointermove', pick); c.addEventListener('click', pick);
+    c.addEventListener('keydown', ev => { const mv = { ArrowUp: [1, 0], ArrowDown: [-1, 0], ArrowLeft: [0, -1], ArrowRight: [0, 1] }[ev.key]; if (!mv) return; ev.preventDefault(); sel = [clamp(sel[0] + mv[0], 0, 5), clamp(sel[1] + mv[1], 0, 5)]; say(); if (!raf) draw(performance.now()); });
+    $$('.pair').forEach(b => b.addEventListener('click', () => { pair = +b.dataset.p; $$('.pair').forEach(q => q.classList.toggle('on', q === b)); kick(); }));
+    $('#cb-view').addEventListener('click', ev => { syn = !syn; ev.currentTarget.textContent = syn ? 'Show inhibition' : 'Show synergy'; kick(); });
+    say();
+    return { draw: () => { t0 = 0; draw(performance.now()); } };
+  })();
+  addEventListener('resize', () => { if (!$('#t-combo').hidden) CB.draw(); });
+})();
+
+/* ---------- who are you, and the spend-follows-proof chart ---------- */
+(() => {
+  const LINES = ['Your method works in your lab. We make it run outside it.', 'Reach your next raise on evidence, with runway to spare.', 'Diligence from people who\u2019ve built what they\u2019re assessing.'];
+  $$('.pick .btn').forEach(b => b.addEventListener('click', () => { $$('.pick .btn').forEach(q => q.classList.toggle('on', q === b)); $('#who').textContent = LINES[+b.dataset.w]; }));
+  $('#ask').addEventListener('submit', e => { e.preventDefault(); const sci = $('#f-sci'); if (!sci.value.trim()) { sci.focus(); $('#f-note').textContent = 'Tell us a little about the science first.'; return; } const body = 'The science:\n' + sci.value.trim() + '\n\nWhere we are: ' + $('#f-stage').value + '\n\nWhat we need to prove, and by when:\n' + $('#f-prove').value.trim() + '\n'; location.href = 'mailto:sam@synthesisbioconsulting.com?subject=' + encodeURIComponent('One question for Synthesis') + '&body=' + encodeURIComponent(body); $('#f-note').textContent = 'Your email app should open with this filled in. If it does not, write to us at sam@synthesisbioconsulting.com.'; });
+  const c = $('#rw'), x = c.getContext('2d'), NAMES = ['TRANSLATION', 'EVALUATION', 'BUILDING', 'VALIDATION'];
+  const usual = [[0, 0], [.07, .6], [.3, .7], [.65, .8], [1, .88]], ours = [[0, .03], [.25, .03], [.25, .13], [.5, .13], [.5, .28], [.75, .28], [.75, .47], [1, .47]];
+  const at = (L, u) => { for (let i = 1; i < L.length; i++) if (u <= L[i][0]) { const a = L[i - 1], b = L[i], t = b[0] === a[0] ? 1 : (u - a[0]) / (b[0] - a[0]); return a[1] + (b[1] - a[1]) * t; } return L[L.length - 1][1]; };
+  let t0 = 0, raf = 0, p = RM ? 1 : 0;
+  function draw(now) {
+    const r = c.getBoundingClientRect(), d = dpr(); if (!r.width) return; if (c.width !== Math.round(r.width * d)) { c.width = Math.round(r.width * d); c.height = Math.round(r.height * d); }
+    if (t0 && !RM) p = clamp((now - t0) / 3400);
+    x.setTransform(d, 0, 0, d, 0, 0); const W = r.width, H = r.height, L = 34, T = 20, PW = W - L - 14, PH = H - T - 56, X = u => L + u * PW, Y = v => T + PH - v * PH, z = Math.max(2, W / 240);
+    x.clearRect(0, 0, W, H); x.font = `400 ${Math.max(10, Math.min(12, W / 46))}px "DM Mono", monospace`; x.textBaseline = 'middle';
+    x.globalAlpha = 1; x.fillStyle = FOG; for (let k = 0; k <= 60; k++) x.fillRect(X(k / 60), Y(0) + 8, 1.5, 1.5);
+    NAMES.forEach((n, i) => { x.textAlign = 'center'; x.fillStyle = FOG; x.fillText(W < 430 ? '0' + (i + 1) : n, X(i / 4 + .125), Y(0) + 28); });
+    x.save(); x.translate(12, T + PH / 2); x.rotate(-Math.PI / 2); x.textAlign = 'center'; x.fillText('CAPITAL SPENT', 0, 0); x.restore();
+    const e = ease(p), n = Math.round(PW / (z * 2.2));
+    // the gap between the two lines is the runway kept
+    x.fillStyle = HL; for (let k = 0; k <= n; k++) { const u = k / n; if (u > e) break; const a = at(usual, u), b = at(ours, u); for (let v = b + .035; v < a - .02; v += .05) { x.globalAlpha = .16; x.fillRect(X(u), Y(v), z * .8, z * .8); } }
+    for (let k = 0; k <= n * 2; k++) { const u = k / (n * 2); if (u > e) break; x.globalAlpha = .5; x.fillStyle = LIGHT; x.fillRect(X(u), Y(at(usual, u)), z, z); }
+    x.globalAlpha = 1; x.fillStyle = HL; for (let i = 1; i < ours.length; i++) { const a = ours[i - 1], b = ours[i], len = Math.hypot((b[0] - a[0]) * PW, (b[1] - a[1]) * PH), m = Math.max(2, Math.round(len / (z * 1.5))); for (let k = 0; k <= m; k++) { const u = a[0] + (b[0] - a[0]) * k / m; if (u > e) break; x.fillRect(X(u) - z * .2, Y(a[1] + (b[1] - a[1]) * k / m) - z * .2, z * 1.4, z * 1.4); } }
+    [.25, .5, .75, 1].forEach((u, i) => { if (e < u) return; const v = ours[i * 2 + 1][1]; x.globalAlpha = 1; x.strokeStyle = HL; x.lineWidth = 1.5; x.strokeRect(X(u) - 7, Y(v) - 7, 14, 14); x.fillStyle = HL; x.textAlign = u === 1 ? 'right' : 'center'; x.fillText('PROOF', X(u) - (u === 1 ? 14 : 0), Y(v) + (u === 1 ? 0 : 20)); });
+    const al = clamp((p - .8) / .2); if (al > 0) { x.globalAlpha = al; x.textAlign = 'left'; x.fillStyle = LIGHT; x.fillText('THE USUAL WAY: SPEND, THEN FIND OUT', X(.1), Y(.8)); x.fillStyle = HL; x.fillText('RUNWAY YOU KEEP', X(.3), Y(.45)); x.textAlign = 'right'; x.fillStyle = FOG; x.fillText('ILLUSTRATIVE', X(1), Y(0) + 46); }
+    x.globalAlpha = 1; raf = p < 1 && t0 ? requestAnimationFrame(draw) : 0;
+  }
+  new IntersectionObserver(es => { if (es[0].isIntersecting && !t0) { t0 = performance.now(); if (!raf) raf = requestAnimationFrame(draw); } }, { threshold: .35 }).observe(c);
+  addEventListener('resize', () => { if (!raf) draw(performance.now()); });
+  draw(0);
+})();
+
+/* ---------- one small loop per service ---------- */
+(() => {
+  const home = $$('main .svc canvas'), cs = [...home, ...$$('canvas.sg')]; if (!cs.length) return;
+  const R = rng(31), rnd = n => [...Array(n)].map(() => [R(), R(), R()]);
+  const OM = rnd(60), BL = rnd(26), NS = rnd(18), BARS = [.5, .78, .38, .9, .62];
+  let raf = 0, on = false;
+  function draw(now) {
+    const t = RM ? 4.6 : now / 1000, p = (t % 5) / 5;
+    cs.forEach((c, i) => { const k = c.dataset.k !== undefined ? +c.dataset.k : i, r = c.getBoundingClientRect(), d = dpr(); if (!r.width) return; if (c.width !== Math.round(r.width * d)) { c.width = Math.round(r.width * d); c.height = Math.round(r.height * d); }
+      const x = c.getContext('2d'); x.setTransform(d, 0, 0, d, 0, 0); const W = r.width, H = r.height, z = Math.max(2, W / 48); x.clearRect(0, 0, W, H);
+      const dot = (u, v, col, a = 1, s = z) => { x.globalAlpha = a; x.fillStyle = col; x.fillRect(u * W - s / 2, v * H - s / 2, s, s); };
+      const sq = (u, v, w, h, col, lw = 1.5) => { x.globalAlpha = 1; x.strokeStyle = col; x.lineWidth = lw; x.strokeRect(u * W, v * H, w * W, h * H); };
+      if (k === 0) { const cx = .46, cy = .52, rr = .3 * H / W, V = [...Array(6)].map((_, i) => [cx + rr * Math.cos(i * Math.PI / 3), cy + .3 * Math.sin(i * Math.PI / 3)]);
+        V.forEach((v, i) => { const w = V[(i + 1) % 6]; for (let j = 0; j < 5; j++) dot(v[0] + (w[0] - v[0]) * j / 5, v[1] + (w[1] - v[1]) * j / 5, LIGHT, .8); });
+        const ph = (t / 1.5) % 3, vi = [0, 2, 4][Math.floor(ph)], f = ph % 1, al = RM ? 1 : Math.sin(f * Math.PI), v = V[vi], ox = (v[0] - cx) * .85, oy = (v[1] - cy) * .85;
+        for (let j = 1; j <= 4; j++) dot(v[0] + ox * j / 4 * (RM ? 1 : .4 + .6 * al), v[1] + oy * j / 4 * (RM ? 1 : .4 + .6 * al), HL, al, j === 4 ? z * 1.8 : z); }
+      if (k === 1) { const wave = p * 14 - 2; OM.forEach((a, i) => { const col = i % 10, row = Math.floor(i / 10), block = col >= 6 && row >= 1 && row <= 3, lit = block && p > .45; dot(.1 + col / 9 * .8, .16 + row / 5 * .68, lit ? HL : LIGHT, lit ? 1 : Math.abs(col - wave) < 1.2 ? .95 : .2 + a[0] * .4, lit ? z * 1.3 : z); }); }
+      if (k === 2) { NS.forEach(a => dot(a[0], a[1], LIGHT, .28)); BL.forEach(a => dot(.64 + (a[0] + a[1] - 1) * .13, .56 + (a[1] + a[2] - 1) * .17, LIGHT, .85));
+        const q = ease(clamp(p * 1.8)), bx = .08 + (.5 - .08) * q, by = .1 + (.34 - .1) * q; sq(bx, by, .28, .44, q >= 1 ? HL : LIGHT, q >= 1 ? 2 : 1); }
+      if (k === 3) { sq(.06, .08, .88, .84, FOG, 1); for (let i = 0; i < 4; i++) { const y = .24 + i * .18, done = p * 5.2 > i + 1; for (let j = 0; j < 8 - i; j++) dot(.16 + j * .07, y, LIGHT, .6); x.globalAlpha = 1; x.strokeStyle = done ? HL : FOG; x.lineWidth = 1.5; x.strokeRect(.8 * W - z * 1.6, y * H - z * 1.6, z * 3.2, z * 3.2); if (done) { x.fillStyle = HL; x.fillRect(.8 * W - z * .8, y * H - z * .8, z * 1.6, z * 1.6); } } }
+      if (k === 4) { [.22, .5, .78].forEach(y => { for (let j = 0; j < 16; j++) dot(.08 + j / 15 * .84, y, LIGHT, .5); }); [.2, .44, .68, .86].forEach((u, i) => { const f = (p * 2 + i * .27) % 1; dot(u, .22 + f * .56, HL, 1, z * 1.5); }); }
+      if (k === 5) { const N3 = [[.5, .2], [.2, .78], [.8, .78]]; N3.forEach((n, i) => { const m = N3[(i + 1) % 3]; for (let j = 1; j < 8; j++) dot(n[0] + (m[0] - n[0]) * j / 8, n[1] + (m[1] - n[1]) * j / 8, LIGHT, .35); sq(n[0] - .07, n[1] - .09, .14, .18, LIGHT, 1.5); });
+        const f = (p * 3) % 3, i0 = Math.floor(f), a = N3[i0], b2 = N3[(i0 + 1) % 3], e = ease(f % 1); dot(a[0] + (b2[0] - a[0]) * e, a[1] + (b2[1] - a[1]) * e, HL, 1, z * 2); }
+      if (k === 6) { for (let i = 0; i < 5; i++) { const n = [9, 12, 11, 12, 7][i], shown = Math.round(clamp(p * 6.5 - i) * n); for (let j = 0; j < shown; j++) dot(.12 + j * .065, .2 + i * .15, i === 0 ? HL : LIGHT, i === 0 ? 1 : .7); } }
+      x.globalAlpha = 1; });
+    raf = (on || document.body.classList.contains('cs')) && !RM ? requestAnimationFrame(draw) : 0;
+  }
+  new IntersectionObserver(es => { on = es[0].isIntersecting; if (on && !raf) raf = requestAnimationFrame(draw); }).observe($('main .svc'));
+  addEventListener('viewchange', () => { if (!raf) raf = requestAnimationFrame(draw); });
+  if (RM) requestAnimationFrame(draw);
+})();
+
+/* ---------- case study graphics and the work view ---------- */
+(() => {
+  const cs = $$('canvas.cg'), R = rng(52), IN = [...Array(40)].map(() => [R(), R(), R()]);
+  let raf = 0;
+  function draw(now) {
+    const p = RM ? .96 : (now / 1000 % 6) / 6;
+    cs.forEach((c, k) => { const r = c.getBoundingClientRect(), d = dpr(); if (!r.width) return; if (c.width !== Math.round(r.width * d)) { c.width = Math.round(r.width * d); c.height = Math.round(r.height * d); }
+      const x = c.getContext('2d'); x.setTransform(d, 0, 0, d, 0, 0); const W = r.width, H = r.height, z = Math.max(2.5, W / 190); x.clearRect(0, 0, W, H);
+      const dot = (u, v, col, a = 1, s = z) => { x.globalAlpha = a; x.fillStyle = col; x.fillRect(u * W - s / 2, v * H - s / 2, s, s); };
+      if (k === 0) { const q = clamp(p * 1.4); IN.forEach((a, i) => { const side = i % 2, sx = side ? .04 + a[0] * .2 : .04 + a[0] * .2, sy = side ? .1 + a[1] * .3 : .6 + a[1] * .3, f = ease(clamp(q * 2.2 - a[2])); dot(sx + (.44 - sx) * f, sy + (.5 - sy) * f, side ? HL : LIGHT, .8 * (1 - f * .9)); });
+        x.globalAlpha = .9; x.strokeStyle = FOG; x.lineWidth = 1; x.strokeRect(.5 * W, .08 * H, .42 * W, .84 * H);
+        for (let i = 0; i < 7; i++) { const n = [10, 16, 15, 16, 12, 16, 9][i], shown = Math.round(clamp(q * 8.5 - i - .6) * n); for (let j = 0; j < shown; j++) dot(.55 + j * .021, .2 + i * .1, i === 0 ? HL : LIGHT, i === 0 ? 1 : .75); } }
+      if (k === 1) { for (let i = 0; i < 80; i++) { const u = i / 79; if (Math.abs(u - .6) < .008) continue; const y = .5 - Math.sin(u * 3.1) * .08 + (u > .6 ? .035 : 0), w = .1 + .04 * Math.pow(Math.abs(u - .5) * 2, 2); dot(.05 + u * .9, y - w, LIGHT, .8); dot(.05 + u * .9, y + w, LIGHT, .8); }
+        const q = clamp(p * 1.5); if (q < 1) { x.globalAlpha = .9; x.fillStyle = HL; x.fillRect(q * W, .12 * H, 2, .76 * H); } if (q > .62) { x.globalAlpha = 1; x.strokeStyle = HL; x.lineWidth = 2; x.strokeRect(.52 * W, .22 * H, .16 * W, .56 * H); } }
+      x.globalAlpha = 1; });
+    raf = document.body.classList.contains('cs') && !RM ? requestAnimationFrame(draw) : 0;
+  }
+  const route = () => { const name = location.hash.slice(1), isCase = name.startsWith('case-') && name !== 'case-studies', id = ROUTES[name] || (isCase ? 'v-work' : null); document.body.classList.toggle('cs', !!id); $$('.view').forEach(el => { el.hidden = el.id !== id; });
+    if (id) { const t = isCase && document.getElementById(name); t ? t.scrollIntoView() : scrollTo(0, 0); if (!raf) raf = requestAnimationFrame(draw); dispatchEvent(new Event('viewchange')); }
+    else { VP.resize(); const el = name && document.getElementById(name); if (el) el.scrollIntoView(); } };
+  addEventListener('hashchange', route); route();
+})();
+
+let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => VP.resize(), 120); });
+})();
+</script>
+</body>
+</html>
